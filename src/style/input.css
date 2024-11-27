@@ -13,6 +13,91 @@ body {
 }
 
 form {
-  background-color: rgba(156, 163, 175, 0.7);
+  background-color: rgba(156, 163, 175, 0.9);
   border-radius: 0.375rem;
+}
+
+.terrin {
+  background-image: url("../assets/img/goal.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1200px;
+  height: 962px;
+  display: grid;
+  grid-template-areas:
+    ". . . . ."
+    "RW .  ST  . LW"
+    " . . . . . "
+    " . CM1 CM2 CM3 . "
+    "LB CB1 GK CB2  RB";
+  grid-template-rows: 90px 233px;
+  gap: 1rem;
+}
+.player-GK {
+  grid-area: GK;
+  width: 13rem;
+  margin-left: -4rem;
+  margin-top: 2rem;
+}
+.player-CB {
+  grid-area: CB1;
+  width: 13rem;
+  margin-left: -6rem;
+    margin-top: -3rem;
+}
+.player-CB2 {
+  grid-area: CB2;
+  width: 13rem;
+  margin-left: -4rem;
+  margin-top: -3rem;
+}
+.player-RB {
+  grid-area: RB;
+  width: 13rem;
+  margin-top: -9rem;
+  margin-left: -10rem;
+}
+.player-CM {
+  grid-area: CM1;
+  width: 13rem;
+  margin-top: -10rem;
+  margin-left: -9rem;
+}
+.player-CM2 {
+  grid-area: CM2;
+  width: 13rem;
+  margin-left: -5rem;
+  margin-top: -7rem;
+}
+.player-CM3 {
+  grid-area: CM3;
+  width: 13rem;
+  margin-top: -10rem;
+}
+.player-LW {
+  grid-area: LW;
+  margin-left: -11rem;
+  margin-top: -8rem;
+  width: 13rem;
+}
+.player-RW {
+  grid-area: RW;
+  margin-left: 6rem;
+  margin-top: -8rem;
+  width: 13rem;
+}
+.player-ST {
+  grid-area: ST;
+  margin-top: -9rem;
+  margin-left: -5rem;
+  width: 13rem;
+}
+.player-LB {
+  grid-area: LB;
+  width: 13rem;
+  margin-top: -9rem;
+  margin-left: 5rem;
+}
+#show-form-button{
+  margin-bottom: 50rem;
 }
