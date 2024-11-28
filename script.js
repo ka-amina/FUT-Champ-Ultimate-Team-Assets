@@ -22,6 +22,48 @@ const defending= document.getElementById("defending")
 const dribbling= document.getElementById("dribbling")
 const physical= document.getElementById("physical")
 const ratingInput= document.getElementById("rating-input")
+// les images des places de terrin
+const rw = document.querySelector(".rw")
+const st = document.querySelector(".st")
+const lw = document.querySelector(".lw")
+const cm = document.querySelector(".cm")
+const cm2 = document.querySelector(".cm2")
+const cm3 = document.querySelector(".cm3")
+const cb = document.querySelector(".cb")
+const cb2 = document.querySelector(".cb2")
+const rb = document.querySelector(".rb")
+const lb = document.querySelector(".lb")
+const gk = document.querySelector(".gk")
+let gkAdded = false;
+let rwAdded = false;
+let stAdded = false;
+let lwAdded = false;
+let cmAdded = false;
+let cm2Added = false;
+let cm3Added = false;
+let cbAdded = false;
+let cb2Added = false;
+let rbAdded = false;
+let lbAdded = false;
+
+const gkFields = [
+  'diving-field',
+  'Handling-field',
+  'Kicking-field',
+  'reflexes-field',
+  'speed-field',
+  'positioning-field'
+];
+
+const playerRating=[
+  'pace-field',
+  'shooting-field',
+  'passing-field',
+  'dribbling-field',
+  'defending-field',
+  'physical-field'
+]
+
 // array to store data
 let players={};
 
@@ -52,20 +94,35 @@ closeForm.forEach((button) => {
   });
 });
 
-addNewPlayer.addEventListener("click",(e)=>{
-    e.preventDefault();
-    const players= document.getElementById("players")
-    const player= document.createElement("div")
-    player.innerHTML=`<div class="relative player-card w-fit">
+
+addNewPlayer.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const players = document.getElementById("players");
+  const player = document.createElement("div");
+  const addGkPlayer = document.getElementById("player-GK");
+  const addRwPlayer = document.getElementById("player-RW");
+  const addStPlayer = document.getElementById("player-ST");
+  const addLwPlayer = document.getElementById("player-LW");
+  const addCmPlayer = document.getElementById("player-CM");
+  const addCm2Player = document.getElementById("player-CM2");
+  const addCm3Player = document.getElementById("player-CM3");
+  const addCbPlayer = document.getElementById("player-CB");
+  const addCb2Player = document.getElementById("player-CB2");
+  const addRbPlayer = document.getElementById("player-RB");
+  const addLbPlayer = document.getElementById("player-LB");
+  
+
+  player.innerHTML = `<div class="relative player-card w-fit">
             <img
               src="./src/assets/img/badge_gold.webp"
               alt=""
               class="w-52 h-72"
             />
             <img
-              src="./src/assets/img/players/Ismael_Saibari.webp"
+              src=""
               alt=""
-              class="absolute top-16 left-10"
+              class="displayProfileImage absolute top-16 left-10"
             />
             <div
               class="flex text-center flex-col leading-3 absolute top-16 left-8"
@@ -123,6 +180,83 @@ addNewPlayer.addEventListener("click",(e)=>{
                 class="w-5 h-6"
               />
             </div>
-          </div>`
-          players.appendChild(player)
-})
+          </div>`;
+
+  // players.appendChild(player);
+ 
+  
+  if (position.value === "GK") {
+    if(!gkAdded){
+    addGkPlayer.appendChild(player);
+    gk.classList.add("hidden")
+    gkAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+
+}
+  if (position.value === "CB") {
+    if(!cbAdded){
+    addCbPlayer.appendChild(player);
+    cb.classList.add("hidden")
+    cbAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+  if (position.value === "CM") {
+    if(!cmAdded){
+    addCmPlayer.appendChild(player);
+    cm.classList.add("hidden")
+    cmAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+  if (position.value === "LB") {
+    if(!lbAdded){
+    addLbPlayer.appendChild(player);
+    lb.classList.add("hidden")
+    lbAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+  if (position.value === "LW") {
+    if(!lwAdded){
+    addLwPlayer.appendChild(player);
+    lw.classList.add("hidden")
+    lwAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+  if (position.value === "RB") {
+    if(!rbAdded){
+    addRbPlayer.appendChild(player);
+    rb.classList.add("hidden")
+    rbAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+  if (position.value === "RW") {
+    if(!rwAdded){
+    addRwPlayer.appendChild(player);
+    rw.classList.add("hidden")
+    rwAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+  if (position.value === "ST") {
+    if(!stAdded){
+    addStPlayer.appendChild(player);
+    st.classList.add("hidden")
+    stAdded=true;
+  }else{
+    players.appendChild(player);
+  }
+  }
+});
+
