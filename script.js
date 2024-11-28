@@ -10,6 +10,7 @@ const addNewPlayer= document.getElementById("addNewPlayer")
 // inputs
 const playerName= document.getElementById("player-name")
 const profileImg= document.getElementById("profile-img")
+
 const position= document.getElementById("position")
 const flag= document.getElementById("flag")
 const club= document.getElementById("club")
@@ -71,7 +72,8 @@ const playerRating=[
 ]
 
 // array to store data
-let players={};
+let playersData={};
+
 
 NavigateToNextForm.addEventListener("click", (e) => {
   e.preventDefault();
@@ -118,7 +120,14 @@ addNewPlayer.addEventListener("click", (e) => {
   const addCb2Player = document.getElementById("player-CB2");
   const addRbPlayer = document.getElementById("player-RB");
   const addLbPlayer = document.getElementById("player-LB");
+  // profile image
+  let PhotosUrl = profileImg.files[0];
+  let photoPlayer = URL.createObjectURL(PhotosUrl);
   
+  let flagUrl = flag.files[0];
+  let playerFlag = URL.createObjectURL(flagUrl);
+  let logoUrl = logo.files[0];
+  let playerlogo = URL.createObjectURL(logoUrl);
 
   player.innerHTML = `<div class="relative player-card w-fit">
             <img
@@ -127,7 +136,7 @@ addNewPlayer.addEventListener("click", (e) => {
               class="w-52 h-72"
             />
             <img
-              src=""
+              src="${photoPlayer}"
               alt=""
               class="displayProfileImage absolute top-16 left-10"
             />
@@ -196,7 +205,7 @@ addNewPlayer.addEventListener("click", (e) => {
               class="w-52 h-72"
             />
             <img
-              src=""
+              src=" ${photoPlayer}"
               alt=""
               class="displayProfileImage absolute top-16 left-10"
             />
@@ -246,12 +255,12 @@ addNewPlayer.addEventListener("click", (e) => {
               class="flex absolute bottom-7 left-20 gap-2 items-center"
             >
               <img
-                src="./src/assets/img/flag/flag.webp"
+                src="${playerFlag}"
                 alt=""
                 class="w-5 h-3"
               />
               <img
-                src="./src/assets/img/logo/logo.webp"
+                src="${playerlogo}"
                 alt=""
                 class="w-5 h-6"
               />
@@ -262,6 +271,24 @@ addNewPlayer.addEventListener("click", (e) => {
   
   if (position.value === "GK") {
     if(!gkAdded){
+      const gkPlayerData={
+        id: Date.now().toString(),
+        name: playerName.value,
+        photo: photoPlayer,
+        position: position.value,
+        nationality: nationality.value,
+        flag: playerFlag,
+        logo:playerlogo,
+        club: club.value,
+        rating: ratingInput.value,
+        diving: diving.value,
+        handling: handling.value,
+        kicking: kicking.value,
+        reflexes: reflexes.value,
+        speed: speed.value,
+        positioning: positioning.value,
+      }
+      console.log(gkPlayerData)
     addGkPlayer.appendChild(gkPlayer);
     gk.classList.add("hidden")
     gkAdded=true;
