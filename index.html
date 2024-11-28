@@ -155,6 +155,7 @@
                   class="p-2 w-80 rounded border border-gray-500"
                 />
               </div>
+              <p id="player-name-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
                 <label for="photo" class="mb-2">Photo</label>
@@ -174,6 +175,7 @@
                   Select Image
                 </label>
               </div>
+              <p id="profile-img-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
                 <label for="position" class="mb-2">Position</label>
@@ -189,6 +191,7 @@
                   <option value="ST">Striker</option>
                 </select>
               </div>
+              <p id="position-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
                 <label for="nationality" class="mb-2">Nationality</label>
@@ -199,11 +202,13 @@
                   class="p-2 w-80 rounded border border-gray-500"
                 />
               </div>
+              <p id="nationality-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
                 <label for="flag" class="mb-2"> flag</label>
                 <input id="flag" type="file" class="w-80" />
               </div>
+              <p id="flag-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
                 <label for="club" class="mb-2">Club</label>
@@ -214,11 +219,13 @@
                   class="p-2 w-80 rounded border border-gray-500"
                 />
               </div>
+              <p id="club-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
                 <label for="logo" class="mb-2"> Logo</label>
                 <input id="logo" type="file" class="w-80 mb-6" />
               </div>
+              <p id="logo-error" class="w-80 hidden text-error"></p>
 
               <div class="items-center p-2">
                 <button
@@ -259,7 +266,10 @@
                     placeholder="Rating"
                     class="p-2 rounded w-36 border border-gray-500"
                   />
+                  <p id="rating-input-error" class="w-36 hidden text-error"></p>
                 </div>
+                
+
                 <div id="pace-field" class="hidden">
                   <div class="flex flex-col">
                     <label for="pace" class="pace">Pace</label>
@@ -269,6 +279,7 @@
                       placeholder="Pace"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="pace-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <!-- Diving input for GK  -->
@@ -281,6 +292,7 @@
                       placeholder="Diving"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="diving-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
               </div>
@@ -295,6 +307,7 @@
                       placeholder="Shooting"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="shooting-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <!-- handling input for GK  -->
@@ -307,6 +320,7 @@
                       placeholder="Handling"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="handling-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <div id="passing-field" class="hidden">
@@ -318,6 +332,7 @@
                       placeholder="passing"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="passing-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <!-- Kicking input for GK  -->
@@ -330,6 +345,7 @@
                       placeholder="Kicking"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="kicking-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
               </div>
@@ -343,6 +359,7 @@
                       placeholder="dribbling"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="dribbling-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <!-- Reflexes input for GK  -->
@@ -355,6 +372,7 @@
                       placeholder="Reflexes"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="reflexes-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <div id="defending-field" class="hidden">
@@ -366,6 +384,7 @@
                       placeholder="defending"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="defending-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
                 <!-- speed input for GK  -->
@@ -379,6 +398,7 @@
                       placeholder="Speed"
                       class="p-2 rounded w-36 border border-gray-500"
                     />
+                    <p id="speed-error" class="w-36 hidden text-error"></p>
                   </div>
                 </div>
               </div>
@@ -390,6 +410,7 @@
                   placeholder="Physical"
                   class="p-2 rounded mb-6 border border-gray-500"
                 />
+                <p id="physical-error" class="hidden text-error"></p>
               </div>
               <!-- Positioning input for GK  -->
 
@@ -401,6 +422,7 @@
                   placeholder="Positioning"
                   class="p-2 rounded mb-6 border border-gray-500"
                 />
+                <p id="positioning-error" class="hidden text-error"></p>
               </div>
               <div class="items-center p-2">
                 <button

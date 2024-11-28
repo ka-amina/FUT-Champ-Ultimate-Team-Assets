@@ -1429,6 +1429,11 @@ video {
   border-bottom-width: 2px;
 }
 
+.border-error {
+  --tw-border-opacity: 1;
+  border-color: rgb(244 67 54 / var(--tw-border-opacity, 1));
+}
+
 .border-gray-500 {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
@@ -1668,6 +1673,11 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-error {
+  --tw-text-opacity: 1;
+  color: rgb(244 67 54 / var(--tw-text-opacity, 1));
 }
 
 .underline {

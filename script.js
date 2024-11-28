@@ -41,6 +41,7 @@ const cb2 = document.querySelector(".cb2")
 const rb = document.querySelector(".rb")
 const lb = document.querySelector(".lb")
 const gk = document.querySelector(".gk")
+
 let gkAdded = false;
 let rwAdded = false;
 let stAdded = false;
@@ -76,9 +77,12 @@ let playersData={};
 
 
 NavigateToNextForm.addEventListener("click", (e) => {
+  // let valid= validatPersonalForm()
   e.preventDefault();
+  // if (valid){
   pesonalInfo.classList.add("hidden");
   rating.classList.remove("hidden");
+  // }
 });
 
 backToPreviousForm.addEventListener("click", (e) => {
@@ -105,7 +109,13 @@ closeForm.forEach((button) => {
 // ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
   e.preventDefault();
-
+  let valid = false;
+  if (position.value === "GK"){
+    valid =validatRatingGkForm()
+  }else{
+    valid= validatRatingForm()
+  }
+  if (!valid) return;
   const players = document.getElementById("players");
   const player = document.createElement("div");
   const gkPlayer = document.createElement("div");
@@ -387,4 +397,165 @@ position.addEventListener("change",(e)=>{
       
     })
   }
+  
 })
+// validation des forms
+
+// personal info form
+const validationPersonalInfoForm={
+  "player-name":{
+    regex: /^[a-zA-Z\s]{2,10}$/,
+    message: "the name must contain at least 5 charachters",
+  },
+  "profile-img":{
+    regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
+    message: "select .jpg .png .webp .jpeg files"
+  },
+  "nationality":{
+    regex: /^[a-zA-Z\s]{10,20}$/,
+    message: "Enter a valid nationality"
+  },
+  "flag":{
+    regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
+    message: "select .jpg .png .webp .jpeg files"
+  },
+  "club":{
+    regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
+    message: "select .jpg .png .webp .jpeg files"
+  },
+
+}
+function ToggleErrorMessage(field, show, message=""){
+  const inputField= document.getElementById(`${field}`);
+  const errorMessage = document.getElementById(`${field}-error`)
+  if (show){
+    errorMessage.textContent=message;
+    errorMessage.classList.remove("hidden");
+    inputField.classList.add("border-error");
+    inputField.classList.remove("border-gray-500");
+  }else{
+    errorMessage.textContent="";
+    inputField.classList.add("border-gray-500")
+  }
+}
+function validatePersonalField(field, value){
+  const rule= validationPersonalInfoForm[field];
+  if (rule && !rule.regex.test(value)){
+    ToggleErrorMessage(field, true, rule.message);
+    return false;
+  }else{
+    ToggleErrorMessage(field, false);
+    return true;
+  }
+}
+function validatPersonalForm(){
+  let valid= true;
+  for(let field in validationPersonalInfoForm){
+    const fieldValue = document.getElementById(field).value;
+    const fieldValid = validatePersonalField(field, fieldValue)
+    if (!fieldValid) valid= false;
+  }
+  return valid;
+}
+// rating form
+const validationRatingForm={
+  "rating-input":{
+    regex: /^\d{2}$/,
+    message: "Ratting between 1 and 99",
+  },
+  "pace":{
+    regex: /^\d{2}$/,
+    message: "pace between 1 and 99"
+  },
+  "shooting":{
+    regex: /^\d{2}$/,
+    message: "shooting between 1 and 99"
+  },
+  "passing":{
+    regex: /^\d{2}$/,
+    message: "passing between 1 and 99"
+  },
+  "dribbling":{
+    regex: /^\d{2}$/,
+    message: "dribbling between 1 and 99"
+  },
+  "defending":{
+    regex: /^\d{2}$/,
+    message: "defending between 1 and 99"
+  },
+  "physical":{
+    regex: /^\d{2}$/,
+    message: "physical between 1 and 99"
+  },
+}
+function ratingField(field, value){
+  const rule= validationRatingForm[field];
+  if (rule && !rule.regex.test(value)){
+    ToggleErrorMessage(field, true, rule.message);
+    return false;
+  }else{
+    ToggleErrorMessage(field, false);
+    return true;
+  }
+}
+function validatRatingForm(){
+  let valid= true;
+  for(let field in validationRatingForm){
+    const fieldValue = document.getElementById(field).value;
+    const fieldValid = ratingField(field, fieldValue)
+    if (!fieldValid) valid= false;
+  }
+  return valid;
+}
+
+// rating gk form
+const validationRatingGkForm={
+  "rating-input":{
+    regex: /^\d{2}$/,
+    message: "Ratting between 1 and 99",
+  },
+  "diving":{
+    regex: /^\d{2}$/,
+    message: "diving between 1 and 99"
+  },
+  "handling":{
+    regex: /^\d{2}$/,
+    message: "handling between 1 and 99"
+  },
+  "kicking":{
+    regex: /^\d{2}$/,
+    message: "kicking between 1 and 99"
+  },
+  "reflexes":{
+    regex: /^\d{2}$/,
+    message: "reflexes between 1 and 99"
+  },
+  "speed":{
+    regex: /^\d{2}$/,
+    message: "speed between 1 and 99"
+  },
+  "positioning":{
+    regex: /^\d{2}$/,
+    message: "positioning between 1 and 99"
+  },
+
+}
+function ratingGkField(field, value){
+  const rule= validationRatingGkForm[field];
+  if (rule && !rule.regex.test(value)){
+    ToggleErrorMessage(field, true, rule.message);
+    return false;
+  }else{
+    ToggleErrorMessage(field, false);
+    return true;
+  }
+}
+function validatRatingGkForm(){
+  let valid= true;
+  for(let field in validationRatingGkForm){
+    const fieldValue = document.getElementById(field).value;
+    const fieldValid = ratingGkField(field, fieldValue)
+    if (!fieldValid) valid= false;
+  }
+  return valid;
+}

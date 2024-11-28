@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         primary: "#55cca2",
-        "primary-hover":"#2F9B75"
+        "primary-hover":"#2F9B75",
+         "error": "#F44336"
       },
       fontSize: {
         xxs: "0.625rem",
