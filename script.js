@@ -22,6 +22,12 @@ const defending= document.getElementById("defending")
 const dribbling= document.getElementById("dribbling")
 const physical= document.getElementById("physical")
 const ratingInput= document.getElementById("rating-input")
+const diving= document.getElementById("diving")
+const kicking= document.getElementById("kicking")
+const reflexes= document.getElementById("reflexes")
+const speed= document.getElementById("speed")
+const positioning= document.getElementById("positioning")
+const handling= document.getElementById("handling")
 // les images des places de terrin
 const rw = document.querySelector(".rw")
 const st = document.querySelector(".st")
@@ -94,12 +100,13 @@ closeForm.forEach((button) => {
   });
 });
 
-
+// ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
   e.preventDefault();
 
   const players = document.getElementById("players");
   const player = document.createElement("div");
+  const gkPlayer = document.createElement("div");
   const addGkPlayer = document.getElementById("player-GK");
   const addRwPlayer = document.getElementById("player-RW");
   const addStPlayer = document.getElementById("player-ST");
@@ -181,17 +188,85 @@ addNewPlayer.addEventListener("click", (e) => {
               />
             </div>
           </div>`;
+// GK player
+ gkPlayer.innerHTML = `<div class="relative player-card w-fit">
+           <img
+              src="./src/assets/img/badge_gold.webp"
+              alt=""
+              class="w-52 h-72"
+            />
+            <img
+              src=""
+              alt=""
+              class="displayProfileImage absolute top-16 left-10"
+            />
+            <div
+              class="flex text-center flex-col leading-3 absolute top-16 left-8"
+            >
+              <span class="font-bold text-xl">${ratingInput.value}</span>
+              <span class="font-mono">CF</span>
+            </div>
 
+            <div
+              class="absolute bottom-20 right-20 font-semibold player-name-card"
+            >
+            ${playerName.value}
+            </div>
+
+            <div
+              class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold"
+            >
+              <div class="flex flex-col leading-3">
+                <span class="text-xxs">DIV</span>
+                <span class="">${diving.value}</span>
+              </div>
+              <div class="flex flex-col leading-3">
+                <span class="text-xxs">HAN</span>
+                <span class="">${handling.value}</span>
+              </div>
+              <div class="flex flex-col leading-3">
+                <span class="text-xxs">KIC</span>
+                <span class="">${kicking.value}</span>
+              </div>
+              <div class="flex flex-col leading-3">
+                <span class="text-xxs">REF</span>
+                <span class="">${reflexes.value}</span>
+              </div>
+              <div class="flex flex-col leading-3">
+                <span class="text-xxs">SPD</span>
+                <span class="">${speed.value}</span>
+              </div>
+              <div class="flex flex-col leading-3">
+                <span class="text-xxs">POS</span>
+                <span class="">${positioning.value}</span>
+              </div>
+            </div>
+            <div
+              id="logo-and-flag"
+              class="flex absolute bottom-7 left-20 gap-2 items-center"
+            >
+              <img
+                src="./src/assets/img/flag/flag.webp"
+                alt=""
+                class="w-5 h-3"
+              />
+              <img
+                src="./src/assets/img/logo/logo.webp"
+                alt=""
+                class="w-5 h-6"
+              />
+            </div>
+          </div>`;
   // players.appendChild(player);
  
   
   if (position.value === "GK") {
     if(!gkAdded){
-    addGkPlayer.appendChild(player);
+    addGkPlayer.appendChild(gkPlayer);
     gk.classList.add("hidden")
     gkAdded=true;
   }else{
-    players.appendChild(player);
+    players.appendChild(gkPlayer);
   }
 
 }
@@ -260,3 +335,29 @@ addNewPlayer.addEventListener("click", (e) => {
   }
 });
 
+position.addEventListener("change",(e)=>{
+  e.preventDefault()
+  if(position.value === 'GK'){
+    gkFields.forEach((field)=>{
+      const input = document.getElementById(field);
+      input.classList.remove("hidden")
+
+    })
+    playerRating.forEach((field)=>{
+      const input = document.getElementById(field);
+      input.classList.add("hidden")
+      
+    })
+  }else{
+    gkFields.forEach((field)=>{
+      const input = document.getElementById(field);
+      input.classList.add("hidden")
+
+    })
+    playerRating.forEach((field)=>{
+      const input = document.getElementById(field);
+      input.classList.remove("hidden")
+      
+    })
+  }
+})
