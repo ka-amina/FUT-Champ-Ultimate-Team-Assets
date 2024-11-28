@@ -6,41 +6,41 @@ const form = document.getElementById("show-form");
 const showForm = document.getElementById("show-form-button");
 const closeForm = document.querySelectorAll(".close-form");
 // ajouter un nouveau joueur
-const addNewPlayer= document.getElementById("addNewPlayer")
+const addNewPlayer = document.getElementById("addNewPlayer");
 // inputs
-const playerName= document.getElementById("player-name")
-const profileImg= document.getElementById("profile-img")
+const playerName = document.getElementById("player-name");
+const profileImg = document.getElementById("profile-img");
 
-const position= document.getElementById("position")
-const flag= document.getElementById("flag")
-const club= document.getElementById("club")
-const logo= document.getElementById("logo")
-const pace= document.getElementById("pace")
-const shooting= document.getElementById("shooting")
-const nationality= document.getElementById("nationality")
-const passing= document.getElementById("passing")
-const defending= document.getElementById("defending")
-const dribbling= document.getElementById("dribbling")
-const physical= document.getElementById("physical")
-const ratingInput= document.getElementById("rating-input")
-const diving= document.getElementById("diving")
-const kicking= document.getElementById("kicking")
-const reflexes= document.getElementById("reflexes")
-const speed= document.getElementById("speed")
-const positioning= document.getElementById("positioning")
-const handling= document.getElementById("handling")
+const position = document.getElementById("position");
+const flag = document.getElementById("flag");
+const club = document.getElementById("club");
+const logo = document.getElementById("logo");
+const pace = document.getElementById("pace");
+const shooting = document.getElementById("shooting");
+const nationality = document.getElementById("nationality");
+const passing = document.getElementById("passing");
+const defending = document.getElementById("defending");
+const dribbling = document.getElementById("dribbling");
+const physical = document.getElementById("physical");
+const ratingInput = document.getElementById("rating-input");
+const diving = document.getElementById("diving");
+const kicking = document.getElementById("kicking");
+const reflexes = document.getElementById("reflexes");
+const speed = document.getElementById("speed");
+const positioning = document.getElementById("positioning");
+const handling = document.getElementById("handling");
 // les images des places de terrin
-const rw = document.querySelector(".rw")
-const st = document.querySelector(".st")
-const lw = document.querySelector(".lw")
-const cm = document.querySelector(".cm")
-const cm2 = document.querySelector(".cm2")
-const cm3 = document.querySelector(".cm3")
-const cb = document.querySelector(".cb")
-const cb2 = document.querySelector(".cb2")
-const rb = document.querySelector(".rb")
-const lb = document.querySelector(".lb")
-const gk = document.querySelector(".gk")
+const rw = document.querySelector(".rw");
+const st = document.querySelector(".st");
+const lw = document.querySelector(".lw");
+const cm = document.querySelector(".cm");
+const cm2 = document.querySelector(".cm2");
+const cm3 = document.querySelector(".cm3");
+const cb = document.querySelector(".cb");
+const cb2 = document.querySelector(".cb2");
+const rb = document.querySelector(".rb");
+const lb = document.querySelector(".lb");
+const gk = document.querySelector(".gk");
 
 let gkAdded = false;
 let rwAdded = false;
@@ -55,26 +55,25 @@ let rbAdded = false;
 let lbAdded = false;
 
 const gkFields = [
-  'diving-field',
-  'Handling-field',
-  'Kicking-field',
-  'reflexes-field',
-  'speed-field',
-  'positioning-field'
+  "diving-field",
+  "Handling-field",
+  "Kicking-field",
+  "reflexes-field",
+  "speed-field",
+  "positioning-field",
 ];
 
-const playerRating=[
-  'pace-field',
-  'shooting-field',
-  'passing-field',
-  'dribbling-field',
-  'defending-field',
-  'physical-field'
-]
+const playerRating = [
+  "pace-field",
+  "shooting-field",
+  "passing-field",
+  "dribbling-field",
+  "defending-field",
+  "physical-field",
+];
 
 // array to store data
-let playersData={};
-
+let playersData = [];
 
 NavigateToNextForm.addEventListener("click", (e) => {
   // let valid= validatPersonalForm()
@@ -98,7 +97,7 @@ showForm.addEventListener("click", (e) => {
 });
 
 closeForm.forEach((button) => {
-    button.addEventListener("click", (e) => {
+  button.addEventListener("click", (e) => {
     e.preventDefault();
 
     form.classList.add("hidden");
@@ -109,13 +108,13 @@ closeForm.forEach((button) => {
 // ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
   e.preventDefault();
-  let valid = false;
-  if (position.value === "GK"){
-    valid =validatRatingGkForm()
-  }else{
-    valid= validatRatingForm()
-  }
-  if (!valid) return;
+  // let valid = false;
+  // if (position.value === "GK"){
+  //   valid =validatRatingGkForm()
+  // }else{
+  //   valid= validatRatingForm()
+  // }
+  // if (!valid) return;
   const players = document.getElementById("players");
   const player = document.createElement("div");
   const gkPlayer = document.createElement("div");
@@ -133,7 +132,7 @@ addNewPlayer.addEventListener("click", (e) => {
   // profile image
   let PhotosUrl = profileImg.files[0];
   let photoPlayer = URL.createObjectURL(PhotosUrl);
-  
+
   let flagUrl = flag.files[0];
   let playerFlag = URL.createObjectURL(flagUrl);
   let logoUrl = logo.files[0];
@@ -207,8 +206,8 @@ addNewPlayer.addEventListener("click", (e) => {
               />
             </div>
           </div>`;
-// GK player
- gkPlayer.innerHTML = `<div class="relative player-card w-fit">
+  // GK player
+  gkPlayer.innerHTML = `<div class="relative player-card w-fit">
            <img
               src="./src/assets/img/badge_gold.webp"
               alt=""
@@ -277,18 +276,17 @@ addNewPlayer.addEventListener("click", (e) => {
             </div>
           </div>`;
   // players.appendChild(player);
- 
-  
+
   if (position.value === "GK") {
-    if(!gkAdded){
-      const gkPlayerData={
+    if (!gkAdded) {
+      const gkPlayerData = {
         id: Date.now().toString(),
         name: playerName.value,
         photo: photoPlayer,
         position: position.value,
         nationality: nationality.value,
         flag: playerFlag,
-        logo:playerlogo,
+        logo: playerlogo,
         club: club.value,
         rating: ratingInput.value,
         diving: diving.value,
@@ -297,265 +295,280 @@ addNewPlayer.addEventListener("click", (e) => {
         reflexes: reflexes.value,
         speed: speed.value,
         positioning: positioning.value,
-      }
-      console.log(gkPlayerData)
-    addGkPlayer.appendChild(gkPlayer);
-    gk.classList.add("hidden")
-    gkAdded=true;
-  }else{
-    players.appendChild(gkPlayer);
+      };
+      console.log(gkPlayerData);
+      playersData.push(gkPlayerData);
+      addGkPlayer.appendChild(gkPlayer);
+      gk.classList.add("hidden");
+      gkAdded = true;
+    } else {
+      players.appendChild(gkPlayer);
+    }
   }
+  if (position.value === "CB" || "CM" || "LB" || "LW" || "RB" || "RW" || "ST") {
+    const PlayerData = {
+      id: Date.now().toString(),
+      name: playerName.value,
+      photo: photoPlayer,
+      position: position.value,
+      nationality: nationality.value,
+      flag: playerFlag,
+      logo: playerlogo,
+      club: club.value,
+      rating: ratingInput.value,
+      pace: pace.value,
+      shooting: shooting.value,
+      passing: passing.value,
+      dribbling: dribbling.value,
+      defending: defending.value,
+      physical: physical.value,
+    };
+    playersData.push(PlayerData);
 
-}
-  if (position.value === "CB") {
-    if(!cbAdded){
-    addCbPlayer.appendChild(player);
-    cb.classList.add("hidden")
-    cbAdded=true;
-  }else{
-    players.appendChild(player);
+    if (position.value === "CB") {
+      if (!cbAdded) {
+        addCbPlayer.appendChild(player);
+        cb.classList.add("hidden");
+        cbAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
+    if (position.value === "CM") {
+      if (!cmAdded) {
+        addCmPlayer.appendChild(player);
+        cm.classList.add("hidden");
+        cmAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
+    if (position.value === "LB") {
+      if (!lbAdded) {
+        addLbPlayer.appendChild(player);
+        lb.classList.add("hidden");
+        lbAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
+    if (position.value === "LW") {
+      if (!lwAdded) {
+        addLwPlayer.appendChild(player);
+        lw.classList.add("hidden");
+        lwAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
+    if (position.value === "RB") {
+      if (!rbAdded) {
+        addRbPlayer.appendChild(player);
+        rb.classList.add("hidden");
+        rbAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
+    if (position.value === "RW") {
+      if (!rwAdded) {
+        addRwPlayer.appendChild(player);
+        rw.classList.add("hidden");
+        rwAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
+    if (position.value === "ST") {
+      if (!stAdded) {
+        addStPlayer.appendChild(player);
+        st.classList.add("hidden");
+        stAdded = true;
+      } else {
+        players.appendChild(player);
+      }
+    }
   }
-  }
-  if (position.value === "CM") {
-    if(!cmAdded){
-    addCmPlayer.appendChild(player);
-    cm.classList.add("hidden")
-    cmAdded=true;
-  }else{
-    players.appendChild(player);
-  }
-  }
-  if (position.value === "LB") {
-    if(!lbAdded){
-    addLbPlayer.appendChild(player);
-    lb.classList.add("hidden")
-    lbAdded=true;
-  }else{
-    players.appendChild(player);
-  }
-  }
-  if (position.value === "LW") {
-    if(!lwAdded){
-    addLwPlayer.appendChild(player);
-    lw.classList.add("hidden")
-    lwAdded=true;
-  }else{
-    players.appendChild(player);
-  }
-  }
-  if (position.value === "RB") {
-    if(!rbAdded){
-    addRbPlayer.appendChild(player);
-    rb.classList.add("hidden")
-    rbAdded=true;
-  }else{
-    players.appendChild(player);
-  }
-  }
-  if (position.value === "RW") {
-    if(!rwAdded){
-    addRwPlayer.appendChild(player);
-    rw.classList.add("hidden")
-    rwAdded=true;
-  }else{
-    players.appendChild(player);
-  }
-  }
-  if (position.value === "ST") {
-    if(!stAdded){
-    addStPlayer.appendChild(player);
-    st.classList.add("hidden")
-    stAdded=true;
-  }else{
-    players.appendChild(player);
-  }
-  }
+  console.log(playersData);
 });
 
-position.addEventListener("change",(e)=>{
-  e.preventDefault()
-  if(position.value === 'GK'){
-    gkFields.forEach((field)=>{
+position.addEventListener("change", (e) => {
+  e.preventDefault();
+  if (position.value === "GK") {
+    gkFields.forEach((field) => {
       const input = document.getElementById(field);
-      input.classList.remove("hidden")
-
-    })
-    playerRating.forEach((field)=>{
+      input.classList.remove("hidden");
+    });
+    playerRating.forEach((field) => {
       const input = document.getElementById(field);
-      input.classList.add("hidden")
-      
-    })
-  }else{
-    gkFields.forEach((field)=>{
+      input.classList.add("hidden");
+    });
+  } else {
+    gkFields.forEach((field) => {
       const input = document.getElementById(field);
-      input.classList.add("hidden")
-
-    })
-    playerRating.forEach((field)=>{
+      input.classList.add("hidden");
+    });
+    playerRating.forEach((field) => {
       const input = document.getElementById(field);
-      input.classList.remove("hidden")
-      
-    })
+      input.classList.remove("hidden");
+    });
   }
-  
-})
+});
 // validation des forms
 
 // personal info form
-const validationPersonalInfoForm={
-  "player-name":{
+const validationPersonalInfoForm = {
+  "player-name": {
     regex: /^[a-zA-Z\s]{2,10}$/,
     message: "the name must contain at least 5 charachters",
   },
-  "profile-img":{
+  "profile-img": {
     regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
-    message: "select .jpg .png .webp .jpeg files"
+    message: "select .jpg .png .webp .jpeg files",
   },
-  "nationality":{
+  nationality: {
     regex: /^[a-zA-Z\s]{10,20}$/,
-    message: "Enter a valid nationality"
+    message: "Enter a valid nationality",
   },
-  "flag":{
+  flag: {
     regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
-    message: "select .jpg .png .webp .jpeg files"
+    message: "select .jpg .png .webp .jpeg files",
   },
-  "club":{
+  club: {
     regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
-    message: "select .jpg .png .webp .jpeg files"
+    message: "select .jpg .png .webp .jpeg files",
   },
-
-}
-function ToggleErrorMessage(field, show, message=""){
-  const inputField= document.getElementById(`${field}`);
-  const errorMessage = document.getElementById(`${field}-error`)
-  if (show){
-    errorMessage.textContent=message;
+};
+function ToggleErrorMessage(field, show, message = "") {
+  const inputField = document.getElementById(`${field}`);
+  const errorMessage = document.getElementById(`${field}-error`);
+  if (show) {
+    errorMessage.textContent = message;
     errorMessage.classList.remove("hidden");
     inputField.classList.add("border-error");
     inputField.classList.remove("border-gray-500");
-  }else{
-    errorMessage.textContent="";
-    inputField.classList.add("border-gray-500")
+  } else {
+    errorMessage.textContent = "";
+    inputField.classList.add("border-gray-500");
   }
 }
-function validatePersonalField(field, value){
-  const rule= validationPersonalInfoForm[field];
-  if (rule && !rule.regex.test(value)){
+function validatePersonalField(field, value) {
+  const rule = validationPersonalInfoForm[field];
+  if (rule && !rule.regex.test(value)) {
     ToggleErrorMessage(field, true, rule.message);
     return false;
-  }else{
+  } else {
     ToggleErrorMessage(field, false);
     return true;
   }
 }
-function validatPersonalForm(){
-  let valid= true;
-  for(let field in validationPersonalInfoForm){
+function validatPersonalForm() {
+  let valid = true;
+  for (let field in validationPersonalInfoForm) {
     const fieldValue = document.getElementById(field).value;
-    const fieldValid = validatePersonalField(field, fieldValue)
-    if (!fieldValid) valid= false;
+    const fieldValid = validatePersonalField(field, fieldValue);
+    if (!fieldValid) valid = false;
   }
   return valid;
 }
 // rating form
-const validationRatingForm={
-  "rating-input":{
+const validationRatingForm = {
+  "rating-input": {
     regex: /^\d{2}$/,
     message: "Ratting between 1 and 99",
   },
-  "pace":{
+  pace: {
     regex: /^\d{2}$/,
-    message: "pace between 1 and 99"
+    message: "pace between 1 and 99",
   },
-  "shooting":{
+  shooting: {
     regex: /^\d{2}$/,
-    message: "shooting between 1 and 99"
+    message: "shooting between 1 and 99",
   },
-  "passing":{
+  passing: {
     regex: /^\d{2}$/,
-    message: "passing between 1 and 99"
+    message: "passing between 1 and 99",
   },
-  "dribbling":{
+  dribbling: {
     regex: /^\d{2}$/,
-    message: "dribbling between 1 and 99"
+    message: "dribbling between 1 and 99",
   },
-  "defending":{
+  defending: {
     regex: /^\d{2}$/,
-    message: "defending between 1 and 99"
+    message: "defending between 1 and 99",
   },
-  "physical":{
+  physical: {
     regex: /^\d{2}$/,
-    message: "physical between 1 and 99"
+    message: "physical between 1 and 99",
   },
-}
-function ratingField(field, value){
-  const rule= validationRatingForm[field];
-  if (rule && !rule.regex.test(value)){
+};
+function ratingField(field, value) {
+  const rule = validationRatingForm[field];
+  if (rule && !rule.regex.test(value)) {
     ToggleErrorMessage(field, true, rule.message);
     return false;
-  }else{
+  } else {
     ToggleErrorMessage(field, false);
     return true;
   }
 }
-function validatRatingForm(){
-  let valid= true;
-  for(let field in validationRatingForm){
+function validatRatingForm() {
+  let valid = true;
+  for (let field in validationRatingForm) {
     const fieldValue = document.getElementById(field).value;
-    const fieldValid = ratingField(field, fieldValue)
-    if (!fieldValid) valid= false;
+    const fieldValid = ratingField(field, fieldValue);
+    if (!fieldValid) valid = false;
   }
   return valid;
 }
 
 // rating gk form
-const validationRatingGkForm={
-  "rating-input":{
+const validationRatingGkForm = {
+  "rating-input": {
     regex: /^\d{2}$/,
     message: "Ratting between 1 and 99",
   },
-  "diving":{
+  diving: {
     regex: /^\d{2}$/,
-    message: "diving between 1 and 99"
+    message: "diving between 1 and 99",
   },
-  "handling":{
+  handling: {
     regex: /^\d{2}$/,
-    message: "handling between 1 and 99"
+    message: "handling between 1 and 99",
   },
-  "kicking":{
+  kicking: {
     regex: /^\d{2}$/,
-    message: "kicking between 1 and 99"
+    message: "kicking between 1 and 99",
   },
-  "reflexes":{
+  reflexes: {
     regex: /^\d{2}$/,
-    message: "reflexes between 1 and 99"
+    message: "reflexes between 1 and 99",
   },
-  "speed":{
+  speed: {
     regex: /^\d{2}$/,
-    message: "speed between 1 and 99"
+    message: "speed between 1 and 99",
   },
-  "positioning":{
+  positioning: {
     regex: /^\d{2}$/,
-    message: "positioning between 1 and 99"
+    message: "positioning between 1 and 99",
   },
-
-}
-function ratingGkField(field, value){
-  const rule= validationRatingGkForm[field];
-  if (rule && !rule.regex.test(value)){
+};
+function ratingGkField(field, value) {
+  const rule = validationRatingGkForm[field];
+  if (rule && !rule.regex.test(value)) {
     ToggleErrorMessage(field, true, rule.message);
     return false;
-  }else{
+  } else {
     ToggleErrorMessage(field, false);
     return true;
   }
 }
-function validatRatingGkForm(){
-  let valid= true;
-  for(let field in validationRatingGkForm){
+function validatRatingGkForm() {
+  let valid = true;
+  for (let field in validationRatingGkForm) {
     const fieldValue = document.getElementById(field).value;
-    const fieldValid = ratingGkField(field, fieldValue)
-    if (!fieldValid) valid= false;
+    const fieldValid = ratingGkField(field, fieldValue);
+    if (!fieldValid) valid = false;
   }
   return valid;
 }
