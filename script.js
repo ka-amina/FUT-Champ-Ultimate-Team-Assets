@@ -572,3 +572,74 @@ function validatRatingGkForm() {
   }
   return valid;
 }
+
+// CHANGER LA FORMATION
+const formation = document.getElementById("formation");
+formation.addEventListener("change", (e) => {
+  e.preventDefault();
+  // les positions des joueurs
+  const gkPlayer = document.querySelector(".player-GK");
+  const RwPlayer = document.querySelector(".player-RW");
+  const stPlayer = document.querySelector(".player-ST");
+  const lwPlayer = document.querySelector(".player-LW");
+  const cmPlayer = document.querySelector(".player-CM");
+  const cm2Player = document.querySelector(".player-CM2");
+  const cbPlayer = document.querySelector(".player-CB");
+  const cb2Player = document.querySelector(".player-CB2");
+  const rbPlayer = document.querySelector(".player-RB");
+  const lbPlayer = document.querySelector(".player-LB");
+  //
+  const playerCm3= document.querySelector(".player-CM3")
+  const terrin = document.querySelector(".terrin");
+  if (formation.value === "424") {
+    playerCm3.classList.add("hidden")
+    const stplayer= document.createElement("div")
+    stplayer.innerHTML=`
+    <div class="player-ST1">
+            <div id="player-ST1" class="relative player-card w-fit">
+              <img
+                src="./src/assets/img/badge_gold.webp"
+                alt=""
+                class="w-52 h-72 st1"
+              />
+            </div>
+          </div>
+    `
+    
+    terrin.appendChild(stplayer)
+    terrin.style.gridTemplateAreas = `
+      ". ST . ST1 ."
+      "RW .  . . LW"
+      ". CM1 . CM2 ."
+      ". . . . ."
+      "LB CB1 GK CB2 RB"
+    `;
+    const st1= document.getElementById("player-ST1")
+    stplayer.style.gridArea="ST1"
+    st1.style.marginLeft="-5rem"
+    st1.style.marginTop="5rem"
+    gkPlayer.style.marginLeft="-10rem"
+    gkPlayer.style.marginTop="5rem"
+    cb2Player.style.marginLeft="-8rem"
+    cbPlayer.style.marginLeft="-8rem"
+    cmPlayer.style.marginTop="-9rem"
+    cm2Player.style.marginTop="-9rem"
+    cm2Player.style.marginLeft="-7rem"
+    lwPlayer.style.marginLeft="-11rem"
+    lwPlayer.style.marginTop="-8rem"
+    stPlayer.style.marginLeft="-4rem"
+    stPlayer.style.marginTop="-4rem"
+  } else {
+    terrin.style.gridTemplateAreas = `
+      ". . . . ."
+      "RW . ST . LW"
+      " . . . . . "
+      " . CM1 CM2 CM3 . "
+      "LB CB1 GK CB2 RB"
+    `;
+    playerCm3.classList.remove("hidden")
+    const st1= document.getElementById("player-ST1")
+    st1.classList.add("hidden")
+  }
+});
+

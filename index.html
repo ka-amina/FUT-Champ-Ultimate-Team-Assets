@@ -7,13 +7,22 @@
     <title>FUT Champ Ultimate Team</title>
   </head>
   <body>
+    <div class="flex justify-end">
+      <form action="" class="flex flex-col mt-32 mr-16 w-40">
+        <span class="p-2">formation</span>
+        <select name="formation" id="formation" class="p-2 rounded-md">
+          <option value="433">4-3-3</option>
+          <option value="424">4-2-4</option>
+        </select>
+      </form>
+    </div>
     <div
-      class="md:flex-row flex-col flex md:justify-between mt-40 backdrop-blur-sm"
+      class="md:flex-row flex-col flex md:justify-between mt-20 backdrop-blur-sm"
     >
       <div>
         <div class="relative terrin w-full">
           <div class="player-RW">
-            <div id="player-RW"class="relative player-card w-fit">
+            <div id="player-RW" class="relative player-card w-fit">
               <img
                 src="./src/assets/img/badge_gold.webp"
                 alt=""
@@ -81,7 +90,7 @@
           </div>
           <!-- CB2 -->
           <div class="player-CB2">
-            <div id="player-CB2"class="relative player-card w-fit">
+            <div id="player-CB2" class="relative player-card w-fit">
               <img
                 src="./src/assets/img/badge_gold.webp"
                 alt=""
@@ -125,7 +134,7 @@
           class="mb-6 bg-slate-100 rounded-md ml-11 lg:ml-6 overflow-y-auto h-72 md:overflow-x-hidden"
         >
           <div class="flex justify-center">
-            <span class="font-mono p-2 border-b-2 w-fit ">Players</span>
+            <span class="font-mono p-2 border-b-2 w-fit">Players</span>
           </div>
           <div id="players" class="flex flex-wrap md:w-full"></div>
         </div>
@@ -165,9 +174,13 @@
                   id="showImg"
                   class="w-40 h-40 hidden mb-6"
                 />
-                <input id="profile-img" type="file" accept=".jpg, .png, .jpeg .webp"
-                onchange="displayImg(event)"
-                class="hidden" />
+                <input
+                  id="profile-img"
+                  type="file"
+                  accept=".jpg, .png, .jpeg .webp"
+                  onchange="displayImg(event)"
+                  class="hidden"
+                />
                 <label
                   for="profile-img"
                   class="cursor-pointer bg-primary text-white py-1 px-2 rounded"
@@ -268,7 +281,6 @@
                   />
                   <p id="rating-input-error" class="w-36 hidden text-error"></p>
                 </div>
-                
 
                 <div id="pace-field" class="hidden">
                   <div class="flex flex-col">
