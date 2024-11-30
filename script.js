@@ -75,6 +75,9 @@ const playerRating = [
 // array to store data
 let playersData = [];
 
+// xlose button of the div cards
+const playerschange = document.getElementById("addTocards")
+
 NavigateToNextForm.addEventListener("click", (e) => {
   // let valid= validatPersonalForm()
   e.preventDefault();
@@ -102,6 +105,7 @@ closeForm.forEach((button) => {
 
     form.classList.add("hidden");
     showForm.classList.remove("hidden");
+    playerschange.classList.add("hidden");
   });
 });
 
@@ -472,36 +476,21 @@ function validatPersonalForm() {
   return valid;
 }
 // rating form
+const createValidationRule = (fieldName) => ({
+  regex: /^\d{2}$/, 
+  message: `${fieldName} between 1 and 99`,
+});
+
 const validationRatingForm = {
-  "rating-input": {
-    regex: /^\d{2}$/,
-    message: "Ratting between 1 and 99",
-  },
-  pace: {
-    regex: /^\d{2}$/,
-    message: "pace between 1 and 99",
-  },
-  shooting: {
-    regex: /^\d{2}$/,
-    message: "shooting between 1 and 99",
-  },
-  passing: {
-    regex: /^\d{2}$/,
-    message: "passing between 1 and 99",
-  },
-  dribbling: {
-    regex: /^\d{2}$/,
-    message: "dribbling between 1 and 99",
-  },
-  defending: {
-    regex: /^\d{2}$/,
-    message: "defending between 1 and 99",
-  },
-  physical: {
-    regex: /^\d{2}$/,
-    message: "physical between 1 and 99",
-  },
+  "rating-input": createValidationRule("Rating"),
+  pace: createValidationRule("Pace"),
+  shooting: createValidationRule("Shooting"),
+  passing: createValidationRule("Passing"),
+  dribbling: createValidationRule("Dribbling"),
+  defending: createValidationRule("Defending"),
+  physical: createValidationRule("Physical"),
 };
+
 function ratingField(field, value) {
   const rule = validationRatingForm[field];
   if (rule && !rule.regex.test(value)) {
@@ -524,35 +513,15 @@ function validatRatingForm() {
 
 // rating gk form
 const validationRatingGkForm = {
-  "rating-input": {
-    regex: /^\d{2}$/,
-    message: "Ratting between 1 and 99",
-  },
-  diving: {
-    regex: /^\d{2}$/,
-    message: "diving between 1 and 99",
-  },
-  handling: {
-    regex: /^\d{2}$/,
-    message: "handling between 1 and 99",
-  },
-  kicking: {
-    regex: /^\d{2}$/,
-    message: "kicking between 1 and 99",
-  },
-  reflexes: {
-    regex: /^\d{2}$/,
-    message: "reflexes between 1 and 99",
-  },
-  speed: {
-    regex: /^\d{2}$/,
-    message: "speed between 1 and 99",
-  },
-  positioning: {
-    regex: /^\d{2}$/,
-    message: "positioning between 1 and 99",
-  },
+  "rating-input": createValidationRule("Rating"),
+  diving: createValidationRule("Diving"),
+  handling: createValidationRule("Handling"),
+  kicking: createValidationRule("Kicking"),
+  reflexes: createValidationRule("Reflexes"),
+  speed: createValidationRule("Speed"),
+  positioning: createValidationRule("Positioning"),
 };
+
 function ratingGkField(field, value) {
   const rule = validationRatingGkForm[field];
   if (rule && !rule.regex.test(value)) {
@@ -578,68 +547,71 @@ const formation = document.getElementById("formation");
 formation.addEventListener("change", (e) => {
   e.preventDefault();
   // les positions des joueurs
-  const gkPlayer = document.querySelector(".player-GK");
-  const RwPlayer = document.querySelector(".player-RW");
-  const stPlayer = document.querySelector(".player-ST");
-  const lwPlayer = document.querySelector(".player-LW");
-  const cmPlayer = document.querySelector(".player-CM");
-  const cm2Player = document.querySelector(".player-CM2");
-  const cbPlayer = document.querySelector(".player-CB");
-  const cb2Player = document.querySelector(".player-CB2");
-  const rbPlayer = document.querySelector(".player-RB");
-  const lbPlayer = document.querySelector(".player-LB");
-  //
-  const playerCm3= document.querySelector(".player-CM3")
-  const terrin = document.querySelector(".terrin");
+  const cm3Player = document.querySelector(".player-CM3");
+  const sT1Player = document.querySelector(".player-ST1");
+  const formationState= document.querySelector(".formationState")
   if (formation.value === "424") {
-    playerCm3.classList.add("hidden")
-    const stplayer= document.createElement("div")
-    stplayer.innerHTML=`
-    <div class="player-ST1">
-            <div id="player-ST1" class="relative player-card w-fit">
-              <img
-                src="./src/assets/img/badge_gold.webp"
-                alt=""
-                class="w-52 h-72 st1"
-              />
-            </div>
-          </div>
-    `
-    
-    terrin.appendChild(stplayer)
-    terrin.style.gridTemplateAreas = `
-      ". ST . ST1 ."
-      "RW .  . . LW"
-      ". CM1 . CM2 ."
-      ". . . . ."
-      "LB CB1 GK CB2 RB"
-    `;
-    const st1= document.getElementById("player-ST1")
-    stplayer.style.gridArea="ST1"
-    st1.style.marginLeft="-5rem"
-    st1.style.marginTop="5rem"
-    gkPlayer.style.marginLeft="-10rem"
-    gkPlayer.style.marginTop="5rem"
-    cb2Player.style.marginLeft="-8rem"
-    cbPlayer.style.marginLeft="-8rem"
-    cmPlayer.style.marginTop="-9rem"
-    cm2Player.style.marginTop="-9rem"
-    cm2Player.style.marginLeft="-7rem"
-    lwPlayer.style.marginLeft="-11rem"
-    lwPlayer.style.marginTop="-8rem"
-    stPlayer.style.marginLeft="-4rem"
-    stPlayer.style.marginTop="-4rem"
-  } else {
-    terrin.style.gridTemplateAreas = `
-      ". . . . ."
-      "RW . ST . LW"
-      " . . . . . "
-      " . CM1 CM2 CM3 . "
-      "LB CB1 GK CB2 RB"
-    `;
-    playerCm3.classList.remove("hidden")
-    const st1= document.getElementById("player-ST1")
-    st1.classList.add("hidden")
+    sT1Player.classList.remove("hidden")
+    cm3Player.classList.add("hidden")
+    formationState.classList.replace('terrin', 'terrain2');
+  console.log("clicked");
+  
+  }else{
+    cm3Player.classList.remove("hidden")
+    sT1Player.classList.add("hidden")
+
+    formationState.classList.replace('terrain2', 'terrin');
   }
 });
 
+// Changement de Formation Dynamique
+// players  cards use class
+const playerscards=[
+  "player-RW",
+  "player-ST",
+  "player-LW",
+  "player-CM",
+  "player-CM2",
+  "player-CM3",
+  "player-CB",
+  "player-CB2",
+  "player-RB",
+  "player-LB",
+  "player-GK",
+]
+// players place use id
+const playersplace=[
+  "player-RW",
+  "player-ST",
+  "player-LW",
+  "player-CM",
+  "player-CM2",
+  "player-CM3",
+  "player-CB",
+  "player-CB2",
+  "player-RB",
+  "player-LB",
+  "player-GK",
+]
+const showelements = document.querySelector(".showElements");
+const players = document.getElementById("players");
+
+
+const playerElements = players.querySelectorAll(".player-card");
+
+playersplace.forEach(card => {
+  const cardelement = document.getElementById(card);
+  if (cardelement) {
+    cardelement.addEventListener("click", () => {
+      console.log("I'm clicked");
+      playerschange.classList.remove("hidden");
+      if (cardelement.id === "player-GK") {
+        playerElements.forEach((element) => {
+          if (element.position === "GK") { 
+            showelements.appendChild(element);
+          }
+        });
+      }
+    });
+  }
+});
