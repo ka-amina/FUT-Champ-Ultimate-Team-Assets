@@ -108,6 +108,14 @@ closeForm.forEach((button) => {
     playerschange.classList.add("hidden");
   });
 });
+const cbPlayers= document.querySelector(".CB-players")
+const gkPlayers= document.querySelector(".Gk-players")
+const cmplayers= document.querySelector(".CM-players")
+const lbplayers= document.querySelector(".LB-players")
+const rbplayers= document.querySelector(".RB-players")
+const lwplayers= document.querySelector(".LW-players")
+const rwplayers= document.querySelector(".RW-players")
+const stplayers= document.querySelector(".ST-players")
 
 // ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
@@ -157,7 +165,7 @@ addNewPlayer.addEventListener("click", (e) => {
               class="flex text-center flex-col leading-3 absolute top-16 left-8"
             >
               <span class="font-bold text-xl">${ratingInput.value}</span>
-              <span class="font-mono">CF</span>
+              <span class="font-mono">${position.value}</span>
             </div>
 
             <div
@@ -226,7 +234,7 @@ addNewPlayer.addEventListener("click", (e) => {
               class="flex text-center flex-col leading-3 absolute top-16 left-8"
             >
               <span class="font-bold text-xl">${ratingInput.value}</span>
-              <span class="font-mono">CF</span>
+              <span class="font-mono">${position.value}</span>
             </div>
 
             <div
@@ -306,7 +314,7 @@ addNewPlayer.addEventListener("click", (e) => {
       gk.classList.add("hidden");
       gkAdded = true;
     } else {
-      players.appendChild(gkPlayer);
+      gkPlayers.appendChild(gkPlayer);
     }
   }
   if (position.value === "CB" || "CM" || "LB" || "LW" || "RB" || "RW" || "ST") {
@@ -334,17 +342,31 @@ addNewPlayer.addEventListener("click", (e) => {
         addCbPlayer.appendChild(player);
         cb.classList.add("hidden");
         cbAdded = true;
-      } else {
-        players.appendChild(player);
+      }else if (!cb2Added){
+        addCb2Player.appendChild(player);
+        cb2.classList.add("hidden");
+        cb2Added = true;
+      }
+      else {
+        cbPlayers.appendChild(player);
       }
     }
     if (position.value === "CM") {
       if (!cmAdded) {
         addCmPlayer.appendChild(player);
         cm.classList.add("hidden");
-        cmAdded = true;
-      } else {
-        players.appendChild(player);
+        cmAdded=true    
+      } else if (!cm2Added) {
+        addCm2Player.appendChild(player);
+        cm2.classList.add("hidden"); 
+        cm2Added=true   
+      } else if (!cm3Added) {
+        addCm3Player.appendChild(player);
+        cm3.classList.add("hidden");
+        cm3Added = true;
+      }
+      else {
+        cmplayers.appendChild(player);
       }
     }
     if (position.value === "LB") {
@@ -353,7 +375,7 @@ addNewPlayer.addEventListener("click", (e) => {
         lb.classList.add("hidden");
         lbAdded = true;
       } else {
-        players.appendChild(player);
+        lbplayers.appendChild(player);
       }
     }
     if (position.value === "LW") {
@@ -362,7 +384,7 @@ addNewPlayer.addEventListener("click", (e) => {
         lw.classList.add("hidden");
         lwAdded = true;
       } else {
-        players.appendChild(player);
+        lwplayers.appendChild(player);
       }
     }
     if (position.value === "RB") {
@@ -371,7 +393,7 @@ addNewPlayer.addEventListener("click", (e) => {
         rb.classList.add("hidden");
         rbAdded = true;
       } else {
-        players.appendChild(player);
+        rbplayers.appendChild(player);
       }
     }
     if (position.value === "RW") {
@@ -380,7 +402,7 @@ addNewPlayer.addEventListener("click", (e) => {
         rw.classList.add("hidden");
         rwAdded = true;
       } else {
-        players.appendChild(player);
+        rwplayers.appendChild(player);
       }
     }
     if (position.value === "ST") {
@@ -389,7 +411,7 @@ addNewPlayer.addEventListener("click", (e) => {
         st.classList.add("hidden");
         stAdded = true;
       } else {
-        players.appendChild(player);
+        stplayers.appendChild(player);
       }
     }
   }
@@ -593,23 +615,36 @@ const playersplace=[
   "player-LB",
   "player-GK",
 ]
+const playerTemplates = {
+  "player-GK": gkPlayers,
+  "player-RW": rwplayers,
+  "player-ST": stplayers,
+  "player-LW": lwplayers,
+  "player-CM": cmplayers,
+  "player-CM2": cmplayers,
+  "player-CM3": cmplayers,
+  "player-CB": cbPlayers,
+  "player-CB2": cbPlayers,
+  "player-RB": rbplayers,
+  "player-LB": lbplayers
+};
 const showelements = document.querySelector(".showElements");
 const players = document.getElementById("players");
-
-
-const playerElements = players.querySelectorAll(".player-card");
 
 playersplace.forEach(card => {
   const cardelement = document.getElementById(card);
   if (cardelement) {
     cardelement.addEventListener("click", () => {
-      console.log("I'm clicked");
       playerschange.classList.remove("hidden");
-      if (cardelement.id === "player-GK") {
-        playerElements.forEach((element) => {
-          if (element.position === "GK") { 
-            showelements.appendChild(element);
-          }
+      if (playerTemplates[cardelement.id]) {
+        const template = playerTemplates[cardelement.id];
+        const clonedTemplate = template.cloneNode(true);
+        showelements.appendChild(clonedTemplate);
+        closeForm.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            e.preventDefault();
+            clonedTemplate.remove();
+          });
         });
       }
     });

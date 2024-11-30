@@ -876,6 +876,10 @@ video {
   grid-column: span 2 / span 2;
 }
 
+.m-20 {
+  margin: 5rem;
+}
+
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -1777,6 +1781,11 @@ video {
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
+html{
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -1903,6 +1912,10 @@ form {
 
   .md\:justify-between {
     justify-content: space-between;
+  }
+
+  .md\:justify-around {
+    justify-content: space-around;
   }
 
   .md\:overflow-x-hidden {
