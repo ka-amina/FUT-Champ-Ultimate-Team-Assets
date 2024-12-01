@@ -1,3 +1,146 @@
+document.addEventListener("DOMContentLoaded", function () {
+  // drag and drop for GK players
+  const gk2 = document.querySelector(".player-GK");
+  new Sortable(gkPlayers, {
+    animation: 400,
+    group: "GK-players",
+    swap: true,
+  });
+
+  new Sortable(gk2, {
+    animation: 400,
+    group: "GK-players",
+    swap: true,
+  });
+
+  // drag and drop for ST players
+  const st = document.querySelector(".player-ST");
+  const st1 = document.querySelector(".player-ST1");
+  new Sortable(stplayers, {
+    animation: 400,
+    group: "ST-players",
+    swap: true,
+  });
+
+  new Sortable(st, {
+    animation: 400,
+    group: "ST-players",
+    swap: true,
+  });
+
+  new Sortable(st1, {
+    animation: 400,
+    group: "ST-players",
+    swap: true,
+  });
+
+  // drag and drop for LW players
+  const lw = document.querySelector(".player-LW");
+  new Sortable(lwplayers, {
+    animation: 400,
+    group: "ST-players",
+    swap: true,
+  });
+
+  new Sortable(lw, {
+    animation: 400,
+    group: "ST-players",
+    swap: true,
+  });
+
+  // drag and drop for CM players
+  const cm = document.querySelector(".player-CM");
+  const cm2 = document.querySelector(".player-CM2");
+  const cm3 = document.querySelector(".player-CM3");
+  new Sortable(cmplayers, {
+    animation: 400,
+    group: "CM-players",
+    swap: true,
+  });
+
+  new Sortable(cm, {
+    animation: 400,
+    group: "CM-players",
+    swap: true,
+  });
+
+  new Sortable(cm2, {
+    animation: 400,
+    group: "CM-players",
+    swap: true,
+  });
+  new Sortable(cm3, {
+    animation: 400,
+    group: "CM-players",
+    swap: true,
+  });
+  // drag and drop for CB players
+  const cb = document.querySelector(".player-CB");
+  const cb2 = document.querySelector(".player-CB2");
+  new Sortable(cbPlayers, {
+    animation: 400,
+    group: "CB-players",
+    swap: true,
+  });
+
+  new Sortable(cb, {
+    animation: 400,
+    group: "CB-players",
+    swap: true,
+  });
+
+  new Sortable(cb2, {
+    animation: 400,
+    group: "CB-players",
+    swap: true,
+  });
+
+  // drag and drop for RB players
+  const rb = document.querySelector(".player-RB");
+  new Sortable(rbplayers, {
+    animation: 400,
+    group: "RB-players",
+    swap: true,
+  });
+
+  new Sortable(rb, {
+    animation: 400,
+    group: "RB-players",
+    swap: true,
+  });
+
+
+  // drag and drop for LB players
+  const lb = document.querySelector(".player-LB");
+  new Sortable(lbplayers, {
+    animation: 400,
+    group: "LB-players",
+    swap: true,
+  });
+
+  new Sortable(lb, {
+    animation: 400,
+    group: "LB-players",
+    swap: true,
+  });
+
+
+  // drag and drop for RW players
+  const rw = document.querySelector(".player-RW");
+  new Sortable(rwplayers, {
+    animation: 400,
+    group: "CB-players",
+    swap: true,
+  });
+
+  new Sortable(rw, {
+    animation: 400,
+    group: "CB-players",
+    swap: true,
+  });
+
+});
+
 const NavigateToNextForm = document.getElementById("NavigateToNextForm");
 const pesonalInfo = document.getElementById("personal-info");
 const rating = document.getElementById("rating");
@@ -76,7 +219,7 @@ const playerRating = [
 let playersData = [];
 
 // xlose button of the div cards
-const playerschange = document.getElementById("addTocards")
+const playerschange = document.getElementById("addTocards");
 
 NavigateToNextForm.addEventListener("click", (e) => {
   // let valid= validatPersonalForm()
@@ -108,14 +251,14 @@ closeForm.forEach((button) => {
     playerschange.classList.add("hidden");
   });
 });
-const cbPlayers= document.querySelector(".CB-players")
-const gkPlayers= document.querySelector(".Gk-players")
-const cmplayers= document.querySelector(".CM-players")
-const lbplayers= document.querySelector(".LB-players")
-const rbplayers= document.querySelector(".RB-players")
-const lwplayers= document.querySelector(".LW-players")
-const rwplayers= document.querySelector(".RW-players")
-const stplayers= document.querySelector(".ST-players")
+const cbPlayers = document.querySelector(".CB-players");
+const gkPlayers = document.querySelector(".Gk-players");
+const cmplayers = document.querySelector(".CM-players");
+const lbplayers = document.querySelector(".LB-players");
+const rbplayers = document.querySelector(".RB-players");
+const lwplayers = document.querySelector(".LW-players");
+const rwplayers = document.querySelector(".RW-players");
+const stplayers = document.querySelector(".ST-players");
 
 // ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
@@ -290,26 +433,25 @@ addNewPlayer.addEventListener("click", (e) => {
   // players.appendChild(player);
 
   if (position.value === "GK") {
+    const gkPlayerData = {
+      id: Date.now().toString(),
+      name: playerName.value,
+      photo: photoPlayer,
+      position: position.value,
+      nationality: nationality.value,
+      flag: playerFlag,
+      logo: playerlogo,
+      club: club.value,
+      rating: ratingInput.value,
+      diving: diving.value,
+      handling: handling.value,
+      kicking: kicking.value,
+      reflexes: reflexes.value,
+      speed: speed.value,
+      positioning: positioning.value,
+    };
+    playersData.push(gkPlayerData);
     if (!gkAdded) {
-      const gkPlayerData = {
-        id: Date.now().toString(),
-        name: playerName.value,
-        photo: photoPlayer,
-        position: position.value,
-        nationality: nationality.value,
-        flag: playerFlag,
-        logo: playerlogo,
-        club: club.value,
-        rating: ratingInput.value,
-        diving: diving.value,
-        handling: handling.value,
-        kicking: kicking.value,
-        reflexes: reflexes.value,
-        speed: speed.value,
-        positioning: positioning.value,
-      };
-      console.log(gkPlayerData);
-      playersData.push(gkPlayerData);
       addGkPlayer.appendChild(gkPlayer);
       gk.classList.add("hidden");
       gkAdded = true;
@@ -342,12 +484,11 @@ addNewPlayer.addEventListener("click", (e) => {
         addCbPlayer.appendChild(player);
         cb.classList.add("hidden");
         cbAdded = true;
-      }else if (!cb2Added){
+      } else if (!cb2Added) {
         addCb2Player.appendChild(player);
         cb2.classList.add("hidden");
         cb2Added = true;
-      }
-      else {
+      } else {
         cbPlayers.appendChild(player);
       }
     }
@@ -355,17 +496,16 @@ addNewPlayer.addEventListener("click", (e) => {
       if (!cmAdded) {
         addCmPlayer.appendChild(player);
         cm.classList.add("hidden");
-        cmAdded=true    
+        cmAdded = true;
       } else if (!cm2Added) {
         addCm2Player.appendChild(player);
-        cm2.classList.add("hidden"); 
-        cm2Added=true   
+        cm2.classList.add("hidden");
+        cm2Added = true;
       } else if (!cm3Added) {
         addCm3Player.appendChild(player);
         cm3.classList.add("hidden");
         cm3Added = true;
-      }
-      else {
+      } else {
         cmplayers.appendChild(player);
       }
     }
@@ -415,6 +555,7 @@ addNewPlayer.addEventListener("click", (e) => {
       }
     }
   }
+  // console.log(PlayerData)
   console.log(playersData);
 });
 
@@ -499,7 +640,7 @@ function validatPersonalForm() {
 }
 // rating form
 const createValidationRule = (fieldName) => ({
-  regex: /^\d{2}$/, 
+  regex: /^\d{2}$/,
   message: `${fieldName} between 1 and 99`,
 });
 
@@ -571,24 +712,23 @@ formation.addEventListener("change", (e) => {
   // les positions des joueurs
   const cm3Player = document.querySelector(".player-CM3");
   const sT1Player = document.querySelector(".player-ST1");
-  const formationState= document.querySelector(".formationState")
+  const formationState = document.querySelector(".formationState");
   if (formation.value === "424") {
-    sT1Player.classList.remove("hidden")
-    cm3Player.classList.add("hidden")
-    formationState.classList.replace('terrin', 'terrain2');
-  console.log("clicked");
-  
-  }else{
-    cm3Player.classList.remove("hidden")
-    sT1Player.classList.add("hidden")
+    sT1Player.classList.remove("hidden");
+    cm3Player.classList.add("hidden");
+    formationState.classList.replace("terrin", "terrain2");
+    console.log("clicked");
+  } else {
+    cm3Player.classList.remove("hidden");
+    sT1Player.classList.add("hidden");
 
-    formationState.classList.replace('terrain2', 'terrin');
+    formationState.classList.replace("terrain2", "terrin");
   }
 });
 
 // Changement de Formation Dynamique
 // players  cards use class
-const playerscards=[
+const playerscards = [
   "player-RW",
   "player-ST",
   "player-LW",
@@ -600,9 +740,9 @@ const playerscards=[
   "player-RB",
   "player-LB",
   "player-GK",
-]
+];
 // players place use id
-const playersplace=[
+const playersplace = [
   "player-RW",
   "player-ST",
   "player-LW",
@@ -614,7 +754,9 @@ const playersplace=[
   "player-RB",
   "player-LB",
   "player-GK",
-]
+];
+
+// players templates for cloneNode
 const playerTemplates = {
   "player-GK": gkPlayers,
   "player-RW": rwplayers,
@@ -626,12 +768,12 @@ const playerTemplates = {
   "player-CB": cbPlayers,
   "player-CB2": cbPlayers,
   "player-RB": rbplayers,
-  "player-LB": lbplayers
+  "player-LB": lbplayers,
 };
 const showelements = document.querySelector(".showElements");
 const players = document.getElementById("players");
 
-playersplace.forEach(card => {
+playersplace.forEach((card) => {
   const cardelement = document.getElementById(card);
   if (cardelement) {
     cardelement.addEventListener("click", () => {

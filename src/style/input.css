@@ -21,10 +21,10 @@ form {
 }
 
 .formationState{
-  background-image: url("../assets/img/goal.webp");
+  background-image: url("../assets/img/goal.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1533px;
+  width: 1349px;
   display: grid;
 }
 

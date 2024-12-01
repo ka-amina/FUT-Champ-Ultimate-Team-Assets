@@ -4,5 +4,8 @@
   },
   "scripts": {
     "build": "tailwindcss -i ./src/style/input.css -o ./src/style/output.css --watch"
+  },
+  "dependencies": {
+    "sortablejs": "^1.15.6"
   }
 }

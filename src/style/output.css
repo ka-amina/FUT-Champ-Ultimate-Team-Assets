@@ -1803,10 +1803,10 @@ form {
 }
 
 .formationState{
-  background-image: url("../assets/img/goal.webp");
+  background-image: url("../assets/img/goal.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1533px;
+  width: 1349px;
   display: grid;
 }
 
@@ -1914,20 +1914,12 @@ form {
     justify-content: space-between;
   }
 
-  .md\:justify-around {
-    justify-content: space-around;
-  }
-
   .md\:overflow-x-hidden {
     overflow-x: hidden;
   }
 }
 
 @media (min-width: 1024px) {
-  .lg\:ml-6 {
-    margin-left: 1.5rem;
-  }
-
   .lg\:block {
     display: block;
   }
