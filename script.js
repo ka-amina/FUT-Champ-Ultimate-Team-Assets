@@ -1,3 +1,13 @@
+// les places des joueurs dans les changements
+const cbPlayers = document.querySelector(".CB-players");
+const gkPlayers = document.querySelector(".Gk-players");
+const cmplayers = document.querySelector(".CM-players");
+const lbplayers = document.querySelector(".LB-players");
+const rbplayers = document.querySelector(".RB-players");
+const lwplayers = document.querySelector(".LW-players");
+const rwplayers = document.querySelector(".RW-players");
+const stplayers = document.querySelector(".ST-players");
+
 document.addEventListener("DOMContentLoaded", function () {
   // drag and drop for GK players
   const gk2 = document.querySelector(".player-GK");
@@ -109,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
     swap: true,
   });
 
-
   // drag and drop for LB players
   const lb = document.querySelector(".player-LB");
   new Sortable(lbplayers, {
@@ -124,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
     swap: true,
   });
 
-
   // drag and drop for RW players
   const rw = document.querySelector(".player-RW");
   new Sortable(rwplayers, {
@@ -138,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
     group: "CB-players",
     swap: true,
   });
-
 });
 
 const NavigateToNextForm = document.getElementById("NavigateToNextForm");
@@ -216,9 +223,274 @@ const playerRating = [
 ];
 
 // array to store data
-let playersData = [];
+let playersData = JSON.parse(localStorage.getItem("playersData")) || [];
+function savePlayersToLocalStorage() {
+  localStorage.setItem("playersData", JSON.stringify(playersData));
+}
+const positionToContainerMap = {
+  GK: "player-GK",
+  CM: "player-CM",
+  ST: "player-ST",
+  LB: "player-LB",
+  RB: "player-RB",
+  CB: "player-CB",
+  LW: "player-LW",
+  RW: "player-RW",
+  // Add other positions as needed
+};
 
-// xlose button of the div cards
+// if the gk player add on localstorage and reload the page after that add a new player dont add it on the stade
+const gkPlayerContainer = document.getElementById("player-GK");
+const gkPlayersContainer = document.querySelector(".Gk-players");
+if (playersData.some((player) => player.position === "GK")) {
+  gkAdded = true;
+}
+const cmPlayersData = playersData.filter((player) => player.position === "CM");
+if (cmPlayersData.length >= 3) {
+  cmAdded = true;
+  cm2Added = true;
+  cm3Added = true;
+}
+// check if the cb player is on data
+const cbPlayersData = playersData.filter((player) => player.position === "CB");
+if (cbPlayersData.length >= 2) {
+  cbAdded = true;
+  cb2Added = true;
+}
+// check of the rw player is on the data
+if (playersData.some((player) => player.position === "RW")) {
+  rwAdded = true;
+}
+// check if the lw player is on data
+if (playersData.some((player) => player.position === "LW")) {
+  lwAdded = true;
+}
+// check if the st player is on data
+if (playersData.some((player) => player.position === "ST")) {
+  stAdded = true;
+}
+
+// check if the RB player is on data
+if (playersData.some((player) => player.position === "RB")) {
+  rbAdded = true;
+}
+// check if the LB player is on data
+if (playersData.some((player) => player.position === "LB")) {
+  lbAdded = true;
+}
+
+// Function to render players in their respective positions
+function renderPlayersByPosition(playersData) {
+  // Filter out only GK players
+  const gkPlayers = playersData.filter((player) => player.position === "GK");
+
+  // Place the first GK player in the gkPlayer div
+  gkPlayers.forEach((player, index) => {
+    const playerCard = createPlayerCard(player);
+    if (index === 0) {
+      gkPlayerContainer.appendChild(playerCard);
+      gk.classList.add("hidden");
+    } else {
+      gkPlayersContainer.appendChild(playerCard);
+    }
+  });
+
+  // place the CM players on thier place
+  const cmPlayers = playersData.filter((player) => player.position === "CM");
+  const addCmPlayer = document.getElementById("player-CM");
+  const addCm2Player = document.getElementById("player-CM2");
+  const addCm3Player = document.getElementById("player-CM3");
+  cmPlayers.forEach((player, index) => {
+    if (index === 0) {
+      addCmPlayer.appendChild(createPlayerCard(player));
+      cm.classList.add("hidden");
+    } else if (index === 1) {
+      addCm2Player.appendChild(createPlayerCard(player));
+      cm2.classList.add("hidden");
+    } else if (index === 2) {
+      addCm3Player.appendChild(createPlayerCard(player));
+      cm3.classList.add("hidden");
+    } else {
+      cmplayers.appendChild(createPlayerCard(player));
+    }
+  });
+  // place the cb players on thiers place
+  const cbplayers = playersData.filter((player) => player.position === "CB");
+  const addCbPlayer = document.getElementById("player-CB");
+  const addCb2Player = document.getElementById("player-CB2");
+  cbplayers.forEach((player, index) => {
+    if (index === 0) {
+      addCbPlayer.appendChild(createPlayerCard(player));
+      cb.classList.add("hidden");
+    } else if (index === 1) {
+      addCb2Player.appendChild(createPlayerCard(player));
+      cb2.classList.add("hidden");
+    } else {
+      cbPlayers.appendChild(createPlayerCard(player));
+    }
+  });
+  // rw player
+  const RW = playersData.filter((player) => player.position === "RW");
+  const addRwPlayer = document.getElementById("player-RW");
+  RW.forEach((player, index) => {
+    const playerCard = createPlayerCard(player);
+    if (index === 0) {
+      addRwPlayer.appendChild(playerCard);
+      rw.classList.add("hidden");
+    } else {
+      rwplayers.appendChild(playerCard);
+    }
+  });
+  // lw player
+  const LW = playersData.filter((player) => player.position === "LW");
+  const addlwPlayer = document.getElementById("player-LW");
+  LW.forEach((player, index) => {
+    const playerCard = createPlayerCard(player);
+    if (index === 0) {
+      addlwPlayer.appendChild(playerCard);
+      lw.classList.add("hidden");
+    } else {
+      lwplayers.appendChild(playerCard);
+    }
+  });
+  // st player
+  const ST = playersData.filter((player) => player.position === "ST");
+  const addstPlayer = document.getElementById("player-ST");
+  ST.forEach((player, index) => {
+    const playerCard = createPlayerCard(player);
+    if (index === 0) {
+      addstPlayer.appendChild(playerCard);
+      st.classList.add("hidden");
+    } else {
+      stplayers.appendChild(playerCard);
+    }
+  });
+  // rb player
+  const RB = playersData.filter((player) => player.position === "RB");
+  const addrbPlayer = document.getElementById("player-RB");
+  RB.forEach((player, index) => {
+    const playerCard = createPlayerCard(player);
+    if (index === 0) {
+      addrbPlayer.appendChild(playerCard);
+      rb.classList.add("hidden");
+    } else {
+      rbplayers.appendChild(playerCard);
+    }
+  });
+  // lb player
+  const LB = playersData.filter((player) => player.position === "LB");
+  const addlbPlayer = document.getElementById("player-LB");
+  LB.forEach((player, index) => {
+    const playerCard = createPlayerCard(player);
+    if (index === 0) {
+      addlbPlayer.appendChild(playerCard);
+      lb.classList.add("hidden");
+    } else {
+      lbplayers.appendChild(playerCard);
+    }
+  });
+}
+
+// Function to create player card
+function createPlayerCard(player) {
+  const playerCard = document.createElement("div");
+  playerCard.classList.add("player-card");
+
+  playerCard.innerHTML = `
+    <div class="relative w-fit">
+      <img
+        src="./src/assets/img/badge_gold.webp"
+        alt=""
+        class="w-52 h-72"
+      />
+      <img
+        src="${player.photo}"
+        alt=""
+        class="displayProfileImage absolute top-16 left-10"
+      />
+      <div class="flex text-center flex-col leading-3 absolute top-16 left-8">
+        <span class="font-bold text-xl">${player.rating}</span>
+        <span class="font-mono">${player.position}</span>
+      </div>
+      <div class="absolute bottom-20 right-20 font-semibold">
+        ${player.name}
+      </div>
+      <div class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold">
+        ${generatePlayerAttributes(player)}
+      </div>
+      <div id="logo-and-flag" class="flex absolute bottom-7 left-20 gap-2 items-center">
+        <img src="${player.flag}" alt="" class="w-5 h-3" />
+        <img src="${player.logo}" alt="" class="w-5 h-6" />
+      </div>
+    </div>
+  `;
+
+  return playerCard;
+}
+
+// place of statistic of the players gk and others
+function generatePlayerAttributes(player) {
+  if (player.position === "GK") {
+    return `
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">DIV</span>
+        <span>${player.diving}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">HAN</span>
+        <span>${player.handling}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">KIC</span>
+        <span>${player.kicking}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">REF</span>
+        <span>${player.reflexes}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">SPD</span>
+        <span>${player.speed}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">POS</span>
+        <span>${player.positioning}</span>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">PAC</span>
+        <span>${player.pace}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">SHO</span>
+        <span>${player.shooting}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">PAS</span>
+        <span>${player.passing}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">DRI</span>
+        <span>${player.dribbling}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">DEF</span>
+        <span>${player.defending}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">PHY</span>
+        <span>${player.physical}</span>
+      </div>
+    `;
+  }
+}
+
+// get players data
+renderPlayersByPosition(playersData);
+
+// close button of the div cards
 const playerschange = document.getElementById("addTocards");
 
 NavigateToNextForm.addEventListener("click", (e) => {
@@ -241,24 +513,17 @@ showForm.addEventListener("click", (e) => {
   form.classList.remove("hidden");
   showForm.classList.add("hidden");
 });
-
+function closeForms() {
+  form.classList.add("hidden");
+  showForm.classList.remove("hidden");
+  playerschange.classList.add("hidden");
+}
 closeForm.forEach((button) => {
   button.addEventListener("click", (e) => {
     e.preventDefault();
-
-    form.classList.add("hidden");
-    showForm.classList.remove("hidden");
-    playerschange.classList.add("hidden");
+    closeForms();
   });
 });
-const cbPlayers = document.querySelector(".CB-players");
-const gkPlayers = document.querySelector(".Gk-players");
-const cmplayers = document.querySelector(".CM-players");
-const lbplayers = document.querySelector(".LB-players");
-const rbplayers = document.querySelector(".RB-players");
-const lwplayers = document.querySelector(".LW-players");
-const rwplayers = document.querySelector(".RW-players");
-const stplayers = document.querySelector(".ST-players");
 
 // ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
@@ -285,152 +550,17 @@ addNewPlayer.addEventListener("click", (e) => {
   const addRbPlayer = document.getElementById("player-RB");
   const addLbPlayer = document.getElementById("player-LB");
   // profile image
-  let PhotosUrl = profileImg.files[0];
-  let photoPlayer = URL.createObjectURL(PhotosUrl);
+  const PhotosUrl = profileImg.files[0];
+  const fileReader = new FileReader();
 
   let flagUrl = flag.files[0];
   let playerFlag = URL.createObjectURL(flagUrl);
   let logoUrl = logo.files[0];
   let playerlogo = URL.createObjectURL(logoUrl);
 
-  player.innerHTML = `<div class="relative player-card w-fit">
-            <img
-              src="./src/assets/img/badge_gold.webp"
-              alt=""
-              class="w-52 h-72"
-            />
-            <img
-              src="${photoPlayer}"
-              alt=""
-              class="displayProfileImage absolute top-16 left-10"
-            />
-            <div
-              class="flex text-center flex-col leading-3 absolute top-16 left-8"
-            >
-              <span class="font-bold text-xl">${ratingInput.value}</span>
-              <span class="font-mono">${position.value}</span>
-            </div>
-
-            <div
-              class="absolute bottom-20 right-20 font-semibold player-name-card"
-            >
-            ${playerName.value}
-            </div>
-
-            <div
-              class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold"
-            >
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">PAC</span>
-                <span class="">${pace.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">SHO</span>
-                <span class="">${shooting.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">PAS</span>
-                <span class="">${passing.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">DRI</span>
-                <span class="">${dribbling.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">DEF</span>
-                <span class="">${defending.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">PHY</span>
-                <span class="">${physical.value}</span>
-              </div>
-            </div>
-            <div
-              id="logo-and-flag"
-              class="flex absolute bottom-7 left-20 gap-2 items-center"
-            >
-              <img
-                src="./src/assets/img/flag/flag.webp"
-                alt=""
-                class="w-5 h-3"
-              />
-              <img
-                src="./src/assets/img/logo/logo.webp"
-                alt=""
-                class="w-5 h-6"
-              />
-            </div>
-          </div>`;
-  // GK player
-  gkPlayer.innerHTML = `<div class="relative player-card w-fit">
-           <img
-              src="./src/assets/img/badge_gold.webp"
-              alt=""
-              class="w-52 h-72"
-            />
-            <img
-              src=" ${photoPlayer}"
-              alt=""
-              class="displayProfileImage absolute top-16 left-10"
-            />
-            <div
-              class="flex text-center flex-col leading-3 absolute top-16 left-8"
-            >
-              <span class="font-bold text-xl">${ratingInput.value}</span>
-              <span class="font-mono">${position.value}</span>
-            </div>
-
-            <div
-              class="absolute bottom-20 right-20 font-semibold player-name-card"
-            >
-            ${playerName.value}
-            </div>
-
-            <div
-              class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold"
-            >
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">DIV</span>
-                <span class="">${diving.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">HAN</span>
-                <span class="">${handling.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">KIC</span>
-                <span class="">${kicking.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">REF</span>
-                <span class="">${reflexes.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">SPD</span>
-                <span class="">${speed.value}</span>
-              </div>
-              <div class="flex flex-col leading-3">
-                <span class="text-xxs">POS</span>
-                <span class="">${positioning.value}</span>
-              </div>
-            </div>
-            <div
-              id="logo-and-flag"
-              class="flex absolute bottom-7 left-20 gap-2 items-center"
-            >
-              <img
-                src="${playerFlag}"
-                alt=""
-                class="w-5 h-3"
-              />
-              <img
-                src="${playerlogo}"
-                alt=""
-                class="w-5 h-6"
-              />
-            </div>
-          </div>`;
   // players.appendChild(player);
+  fileReader.onload = function (event) {
+    const photoPlayer = event.target.result;
 
   if (position.value === "GK") {
     const gkPlayerData = {
@@ -451,15 +581,94 @@ addNewPlayer.addEventListener("click", (e) => {
       positioning: positioning.value,
     };
     playersData.push(gkPlayerData);
+    console.log(gkPlayerData);
+    savePlayersToLocalStorage();
+    // GK player
+  gkPlayer.innerHTML = `<div class="relative player-card w-fit">
+  <img
+     src="./src/assets/img/badge_gold.webp"
+     alt=""
+     class="w-52 h-72"
+   />
+   <img
+     src=" ${gkPlayerData.photo}"
+     alt=""
+     class="displayProfileImage absolute top-16 left-10"
+   />
+   <div
+     class="flex text-center flex-col leading-3 absolute top-16 left-8"
+   >
+     <span class="font-bold text-xl">${ratingInput.value}</span>
+     <span class="font-mono">${position.value}</span>
+   </div>
+
+   <div
+     class="absolute bottom-20 right-20 font-semibold player-name-card"
+   >
+   ${playerName.value}
+   </div>
+
+   <div
+     class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold"
+   >
+     <div class="flex flex-col leading-3">
+       <span class="text-xxs">DIV</span>
+       <span class="">${diving.value}</span>
+     </div>
+     <div class="flex flex-col leading-3">
+       <span class="text-xxs">HAN</span>
+       <span class="">${handling.value}</span>
+     </div>
+     <div class="flex flex-col leading-3">
+       <span class="text-xxs">KIC</span>
+       <span class="">${kicking.value}</span>
+     </div>
+     <div class="flex flex-col leading-3">
+       <span class="text-xxs">REF</span>
+       <span class="">${reflexes.value}</span>
+     </div>
+     <div class="flex flex-col leading-3">
+       <span class="text-xxs">SPD</span>
+       <span class="">${speed.value}</span>
+     </div>
+     <div class="flex flex-col leading-3">
+       <span class="text-xxs">POS</span>
+       <span class="">${positioning.value}</span>
+     </div>
+   </div>
+   <div
+     id="logo-and-flag"
+     class="flex absolute bottom-7 left-20 gap-2 items-center"
+   >
+     <img
+       src="${playerFlag}"
+       alt=""
+       class="w-5 h-3"
+     />
+     <img
+       src="${playerlogo}"
+       alt=""
+       class="w-5 h-6"
+     />
+   </div>
+ </div>`;
     if (!gkAdded) {
-      addGkPlayer.appendChild(gkPlayer);
+      addGkPlayer.append(gkPlayer);
       gk.classList.add("hidden");
       gkAdded = true;
     } else {
       gkPlayers.appendChild(gkPlayer);
     }
   }
-  if (position.value === "CB" || "CM" || "LB" || "LW" || "RB" || "RW" || "ST") {
+  if (
+    position.value === "CB" ||
+    position.value === "CM" ||
+    position.value === "LB" ||
+    position.value === "LW" ||
+    position.value === "RB" ||
+    position.value === "RW" ||
+    position.value === "ST"
+  ) {
     const PlayerData = {
       id: Date.now().toString(),
       name: playerName.value,
@@ -478,6 +687,75 @@ addNewPlayer.addEventListener("click", (e) => {
       physical: physical.value,
     };
     playersData.push(PlayerData);
+    savePlayersToLocalStorage();
+    player.innerHTML = `<div class="relative player-card w-fit">
+    <img
+      src="./src/assets/img/badge_gold.webp"
+      alt=""
+      class="w-52 h-72"
+    />
+    <img
+      src="${PlayerData.photo}"
+      alt=""
+      class="displayProfileImage absolute top-16 left-10"
+    />
+    <div
+      class="flex text-center flex-col leading-3 absolute top-16 left-8"
+    >
+      <span class="font-bold text-xl">${ratingInput.value}</span>
+      <span class="font-mono">${position.value}</span>
+    </div>
+
+    <div
+      class="absolute bottom-20 right-20 font-semibold player-name-card"
+    >
+    ${playerName.value}
+    </div>
+
+    <div
+      class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold"
+    >
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">PAC</span>
+        <span class="">${pace.value}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">SHO</span>
+        <span class="">${shooting.value}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">PAS</span>
+        <span class="">${passing.value}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">DRI</span>
+        <span class="">${dribbling.value}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">DEF</span>
+        <span class="">${defending.value}</span>
+      </div>
+      <div class="flex flex-col leading-3">
+        <span class="text-xxs">PHY</span>
+        <span class="">${physical.value}</span>
+      </div>
+    </div>
+    <div
+      id="logo-and-flag"
+      class="flex absolute bottom-7 left-20 gap-2 items-center"
+    >
+      <img
+        src="./src/assets/img/flag/flag.webp"
+        alt=""
+        class="w-5 h-3"
+      />
+      <img
+        src="./src/assets/img/logo/logo.webp"
+        alt=""
+        class="w-5 h-6"
+      />
+    </div>
+  </div>`;
 
     if (position.value === "CB") {
       if (!cbAdded) {
@@ -555,6 +833,26 @@ addNewPlayer.addEventListener("click", (e) => {
       }
     }
   }
+  closeForms();
+  playerName.value = "";
+  position.value = "";
+  nationality.value = "";
+  club.value = "";
+  ratingInput.value = "";
+  diving.value = "";
+  handling.value = "";
+  kicking.value = "";
+  reflexes.value = "";
+  speed.value = "";
+  positioning.value = "";
+  pace.value = "";
+  shooting.value = "";
+  passing.value = "";
+  dribbling.value = "";
+  defending.value = "";
+  physical.value = "";
+  }
+  fileReader.readAsDataURL(PhotosUrl);
   // console.log(PlayerData)
   console.log(playersData);
 });
@@ -721,7 +1019,6 @@ formation.addEventListener("change", (e) => {
   } else {
     cm3Player.classList.remove("hidden");
     sT1Player.classList.add("hidden");
-
     formationState.classList.replace("terrain2", "terrin");
   }
 });
