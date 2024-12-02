@@ -48,13 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const lw = document.querySelector(".player-LW");
   new Sortable(lwplayers, {
     animation: 400,
-    group: "ST-players",
+    group: "LW-players",
     swap: true,
   });
 
   new Sortable(lw, {
     animation: 400,
-    group: "ST-players",
+    group: "LW-players",
     swap: true,
   });
 
@@ -422,6 +422,19 @@ function createPlayerCard(player) {
         <img src="${player.flag}" alt="" class="w-5 h-3" />
         <img src="${player.logo}" alt="" class="w-5 h-6" />
       </div>
+      <span id="show-options" class="cursor-pointer absolute top-20 right-8 show-options"
+        ><img src="./src/icons/dots.svg" alt="" width="20" height="20"
+      /></span>
+      <div id="deleteUpdateBtns" class="hidden">
+        <div class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md">
+          <span id="delete-player" class="mb-4 cursor-pointer"
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+          /></span>
+          <span id="update-player" class="cursor-pointer "
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
+          /></span>
+        </div>
+      </div>
     </div>
   `;
 
@@ -562,29 +575,29 @@ addNewPlayer.addEventListener("click", (e) => {
   fileReader.onload = function (event) {
     const photoPlayer = event.target.result;
 
-  if (position.value === "GK") {
-    const gkPlayerData = {
-      id: Date.now().toString(),
-      name: playerName.value,
-      photo: photoPlayer,
-      position: position.value,
-      nationality: nationality.value,
-      flag: playerFlag,
-      logo: playerlogo,
-      club: club.value,
-      rating: ratingInput.value,
-      diving: diving.value,
-      handling: handling.value,
-      kicking: kicking.value,
-      reflexes: reflexes.value,
-      speed: speed.value,
-      positioning: positioning.value,
-    };
-    playersData.push(gkPlayerData);
-    console.log(gkPlayerData);
-    savePlayersToLocalStorage();
-    // GK player
-  gkPlayer.innerHTML = `<div class="relative player-card w-fit">
+    if (position.value === "GK") {
+      const gkPlayerData = {
+        id: Date.now().toString(),
+        name: playerName.value,
+        photo: photoPlayer,
+        position: position.value,
+        nationality: nationality.value,
+        flag: playerFlag,
+        logo: playerlogo,
+        club: club.value,
+        rating: ratingInput.value,
+        diving: diving.value,
+        handling: handling.value,
+        kicking: kicking.value,
+        reflexes: reflexes.value,
+        speed: speed.value,
+        positioning: positioning.value,
+      };
+      playersData.push(gkPlayerData);
+      console.log(gkPlayerData);
+      savePlayersToLocalStorage();
+      // GK player
+      gkPlayer.innerHTML = `<div class="relative player-card w-fit">
   <img
      src="./src/assets/img/badge_gold.webp"
      alt=""
@@ -651,44 +664,57 @@ addNewPlayer.addEventListener("click", (e) => {
        class="w-5 h-6"
      />
    </div>
+   <span id="show-options" class="cursor-pointer absolute top-20 right-8 show-options"
+        ><img src="./src/icons/dots.svg" alt="" width="20" height="20"
+      /></span>
+      <div id="deleteUpdateBtns" class="hidden">
+        <div class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md">
+          <span id="delete-player" class="mb-4 cursor-pointer"
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+          /></span>
+          <span id="update-player" class="cursor-pointer "
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
+          /></span>
+        </div>
+      </div>
  </div>`;
-    if (!gkAdded) {
-      addGkPlayer.append(gkPlayer);
-      gk.classList.add("hidden");
-      gkAdded = true;
-    } else {
-      gkPlayers.appendChild(gkPlayer);
+      if (!gkAdded) {
+        addGkPlayer.append(gkPlayer);
+        gk.classList.add("hidden");
+        gkAdded = true;
+      } else {
+        gkPlayers.appendChild(gkPlayer);
+      }
     }
-  }
-  if (
-    position.value === "CB" ||
-    position.value === "CM" ||
-    position.value === "LB" ||
-    position.value === "LW" ||
-    position.value === "RB" ||
-    position.value === "RW" ||
-    position.value === "ST"
-  ) {
-    const PlayerData = {
-      id: Date.now().toString(),
-      name: playerName.value,
-      photo: photoPlayer,
-      position: position.value,
-      nationality: nationality.value,
-      flag: playerFlag,
-      logo: playerlogo,
-      club: club.value,
-      rating: ratingInput.value,
-      pace: pace.value,
-      shooting: shooting.value,
-      passing: passing.value,
-      dribbling: dribbling.value,
-      defending: defending.value,
-      physical: physical.value,
-    };
-    playersData.push(PlayerData);
-    savePlayersToLocalStorage();
-    player.innerHTML = `<div class="relative player-card w-fit">
+    if (
+      position.value === "CB" ||
+      position.value === "CM" ||
+      position.value === "LB" ||
+      position.value === "LW" ||
+      position.value === "RB" ||
+      position.value === "RW" ||
+      position.value === "ST"
+    ) {
+      const PlayerData = {
+        id: Date.now().toString(),
+        name: playerName.value,
+        photo: photoPlayer,
+        position: position.value,
+        nationality: nationality.value,
+        flag: playerFlag,
+        logo: playerlogo,
+        club: club.value,
+        rating: ratingInput.value,
+        pace: pace.value,
+        shooting: shooting.value,
+        passing: passing.value,
+        dribbling: dribbling.value,
+        defending: defending.value,
+        physical: physical.value,
+      };
+      playersData.push(PlayerData);
+      savePlayersToLocalStorage();
+      player.innerHTML = `<div class="relative player-card w-fit">
     <img
       src="./src/assets/img/badge_gold.webp"
       alt=""
@@ -755,103 +781,116 @@ addNewPlayer.addEventListener("click", (e) => {
         class="w-5 h-6"
       />
     </div>
+    <span id="show-options" class="cursor-pointer absolute top-20 right-8 show-options"
+        ><img src="./src/icons/dots.svg" alt="" width="20" height="20"
+      /></span>
+      <div id="deleteUpdateBtns" class="hidden">
+        <div class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md">
+          <span id="delete-player" class="mb-4 cursor-pointer"
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+          /></span>
+          <span id="update-player" class="cursor-pointer "
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
+          /></span>
+        </div>
+      </div>
   </div>`;
 
-    if (position.value === "CB") {
-      if (!cbAdded) {
-        addCbPlayer.appendChild(player);
-        cb.classList.add("hidden");
-        cbAdded = true;
-      } else if (!cb2Added) {
-        addCb2Player.appendChild(player);
-        cb2.classList.add("hidden");
-        cb2Added = true;
-      } else {
-        cbPlayers.appendChild(player);
+      if (position.value === "CB") {
+        if (!cbAdded) {
+          addCbPlayer.appendChild(player);
+          cb.classList.add("hidden");
+          cbAdded = true;
+        } else if (!cb2Added) {
+          addCb2Player.appendChild(player);
+          cb2.classList.add("hidden");
+          cb2Added = true;
+        } else {
+          cbPlayers.appendChild(player);
+        }
+      }
+      if (position.value === "CM") {
+        if (!cmAdded) {
+          addCmPlayer.appendChild(player);
+          cm.classList.add("hidden");
+          cmAdded = true;
+        } else if (!cm2Added) {
+          addCm2Player.appendChild(player);
+          cm2.classList.add("hidden");
+          cm2Added = true;
+        } else if (!cm3Added) {
+          addCm3Player.appendChild(player);
+          cm3.classList.add("hidden");
+          cm3Added = true;
+        } else {
+          cmplayers.appendChild(player);
+        }
+      }
+      if (position.value === "LB") {
+        if (!lbAdded) {
+          addLbPlayer.appendChild(player);
+          lb.classList.add("hidden");
+          lbAdded = true;
+        } else {
+          lbplayers.appendChild(player);
+        }
+      }
+      if (position.value === "LW") {
+        if (!lwAdded) {
+          addLwPlayer.appendChild(player);
+          lw.classList.add("hidden");
+          lwAdded = true;
+        } else {
+          lwplayers.appendChild(player);
+        }
+      }
+      if (position.value === "RB") {
+        if (!rbAdded) {
+          addRbPlayer.appendChild(player);
+          rb.classList.add("hidden");
+          rbAdded = true;
+        } else {
+          rbplayers.appendChild(player);
+        }
+      }
+      if (position.value === "RW") {
+        if (!rwAdded) {
+          addRwPlayer.appendChild(player);
+          rw.classList.add("hidden");
+          rwAdded = true;
+        } else {
+          rwplayers.appendChild(player);
+        }
+      }
+      if (position.value === "ST") {
+        if (!stAdded) {
+          addStPlayer.appendChild(player);
+          st.classList.add("hidden");
+          stAdded = true;
+        } else {
+          stplayers.appendChild(player);
+        }
       }
     }
-    if (position.value === "CM") {
-      if (!cmAdded) {
-        addCmPlayer.appendChild(player);
-        cm.classList.add("hidden");
-        cmAdded = true;
-      } else if (!cm2Added) {
-        addCm2Player.appendChild(player);
-        cm2.classList.add("hidden");
-        cm2Added = true;
-      } else if (!cm3Added) {
-        addCm3Player.appendChild(player);
-        cm3.classList.add("hidden");
-        cm3Added = true;
-      } else {
-        cmplayers.appendChild(player);
-      }
-    }
-    if (position.value === "LB") {
-      if (!lbAdded) {
-        addLbPlayer.appendChild(player);
-        lb.classList.add("hidden");
-        lbAdded = true;
-      } else {
-        lbplayers.appendChild(player);
-      }
-    }
-    if (position.value === "LW") {
-      if (!lwAdded) {
-        addLwPlayer.appendChild(player);
-        lw.classList.add("hidden");
-        lwAdded = true;
-      } else {
-        lwplayers.appendChild(player);
-      }
-    }
-    if (position.value === "RB") {
-      if (!rbAdded) {
-        addRbPlayer.appendChild(player);
-        rb.classList.add("hidden");
-        rbAdded = true;
-      } else {
-        rbplayers.appendChild(player);
-      }
-    }
-    if (position.value === "RW") {
-      if (!rwAdded) {
-        addRwPlayer.appendChild(player);
-        rw.classList.add("hidden");
-        rwAdded = true;
-      } else {
-        rwplayers.appendChild(player);
-      }
-    }
-    if (position.value === "ST") {
-      if (!stAdded) {
-        addStPlayer.appendChild(player);
-        st.classList.add("hidden");
-        stAdded = true;
-      } else {
-        stplayers.appendChild(player);
-      }
-    }
-  }
-  closeForms();
-  playerName.value = "";
-  position.value = "";
-  nationality.value = "";
-  club.value = "";
-  ratingInput.value = "";
-  diving.value = "";
-  handling.value = "";
-  kicking.value = "";
-  reflexes.value = "";
-  speed.value = "";
-  positioning.value = "";
-  pace.value = "";
-  shooting.value = "";
-  passing.value = "";
-  dribbling.value = "";
-  defending.value = "";
-  physical.value = "";
-  }
+    closeForms();
+    playerName.value = "";
+    position.value = "";
+    nationality.value = "";
+    club.value = "";
+    ratingInput.value = "";
+    diving.value = "";
+    handling.value = "";
+    kicking.value = "";
+    reflexes.value = "";
+    speed.value = "";
+    positioning.value = "";
+    pace.value = "";
+    shooting.value = "";
+    passing.value = "";
+    dribbling.value = "";
+    defending.value = "";
+    physical.value = "";
+  };
   fileReader.readAsDataURL(PhotosUrl);
   // console.log(PlayerData)
   console.log(playersData);
@@ -1067,25 +1106,44 @@ const playerTemplates = {
   "player-RB": rbplayers,
   "player-LB": lbplayers,
 };
-const showelements = document.querySelector(".showElements");
-const players = document.getElementById("players");
 
-playersplace.forEach((card) => {
-  const cardelement = document.getElementById(card);
-  if (cardelement) {
-    cardelement.addEventListener("click", () => {
-      playerschange.classList.remove("hidden");
-      if (playerTemplates[cardelement.id]) {
-        const template = playerTemplates[cardelement.id];
-        const clonedTemplate = template.cloneNode(true);
-        showelements.appendChild(clonedTemplate);
-        closeForm.forEach((button) => {
-          button.addEventListener("click", (e) => {
-            e.preventDefault();
-            clonedTemplate.remove();
-          });
-        });
-      }
-    });
-  }
+// show dropdown
+const showoptions = document.querySelectorAll(".show-options");
+showoptions.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    const card = button.parentElement;
+    const deleteUpdateBtns = card.querySelector("#deleteUpdateBtns");
+    deleteUpdateBtns.classList.toggle("hidden");
+  });
+});
+
+
+// DELETE PLAYERS
+const deletePlayerButtons = document.querySelectorAll("#delete-player");
+deletePlayerButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Find the parent card of the clicked button
+    const card = button.closest(".player-card");
+    if (!card) return;
+    // take the id
+    const cardId = card.getAttribute("id");
+    console.log(cardId);
+    // Check if the card is inside terrain or changements
+    const isInTerrain = card.closest(".terrin");
+    const isInChangements = card.closest(".changements");
+
+    if (isInTerrain) {
+      const parent = card.parentElement;
+      card.remove();
+      const placeholderCard = document.createElement("img");
+      placeholderCard.src = "./src/assets/img/badge_gold.webp";
+      placeholderCard.classList.add("w-52", "h-72");
+      parent.appendChild(placeholderCard);
+    } else if (isInChangements) {
+      card.remove();
+    }
+  });
 });

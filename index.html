@@ -162,7 +162,7 @@
         </div>
         <!-- players div -->
         <div
-          class="mt-10 mb-6 bg-slate-100 rounded-md m-20 overflow-y-auto h-72 md:overflow-x-hidden"
+          class="mt-10 mb-6 bg-slate-100 rounded-md m-20 overflow-y-auto h-72 md:overflow-x-hidden changements"
         >
           <div class="flex justify-center">
             <span class="font-mono p-2 border-b-2 w-fit">Players</span>
@@ -254,7 +254,6 @@
           <div class="RW-players flex flex-wrap"></div>
           <span>Striker</span>
           <div class="ST-players flex flex-wrap"></div>
-          
         </div>
       </div>
       <div id="show-form" class="absolute top-0 right-96 hidden">
@@ -580,23 +579,69 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="relative player-card w-fit">
+      <img src="./src/assets/img/badge_gold.webp" alt="" class="w-52 h-72" />
+      <img
+        src="./src/assets/img/players/Ismael_Saibari.webp"
+        alt=""
+        class="absolute top-16 left-10"
+      />
+      <div class="flex text-center flex-col leading-3 absolute top-16 left-8">
+        <span class="font-bold text-xl">90</span>
+        <span class="font-mono">CF</span>
+      </div>
 
-      <div
-        id="addTocards"
-        class="hidden w-[40rem] h-[30rem] absolute bg-white rounded top-52 left-96 overflow-y-auto"
-      >
+      <div class="absolute bottom-20 right-20 font-semibold player-name-card">
+        Saibari
+      </div>
+
+      <div class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold">
+        <div class="flex flex-col leading-3">
+          <span class="text-xxs">PAC</span>
+          <span class="">80</span>
+        </div>
+        <div class="flex flex-col leading-3">
+          <span class="text-xxs">SHO</span>
+          <span class="">87</span>
+        </div>
+        <div class="flex flex-col leading-3">
+          <span class="text-xxs">PAS</span>
+          <span class="">90</span>
+        </div>
+        <div class="flex flex-col leading-3">
+          <span class="text-xxs">DRI</span>
+          <span class="">94</span>
+        </div>
+        <div class="flex flex-col leading-3">
+          <span class="text-xxs">DEF</span>
+          <span class="">33</span>
+        </div>
+        <div class="flex flex-col leading-3">
+          <span class="text-xxs">PHY</span>
+          <span class="">64</span>
+        </div>
+      </div>
+      <span
+        id="show-options"
+        class="cursor-pointer absolute top-20 right-8 show-options"
+        ><img src="./src/icons/dots.svg" alt="" width="20" height="20"
+      /></span>
+      <div id="deleteUpdateBtns" class="hidden">
         <div
-          class="p-4 border-b-2 w-[40rem] text-center font-bold border-b-black flex justify-between items-center"
+          class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md"
         >
-          <span>players</span>
-          <span class="close-form cursor-pointer"
-            ><img src="./src/icons/close.svg" alt="" width="24" height="24"
+          <span id="delete-player" class="mb-4 cursor-pointer"
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+          /></span>
+          <span id="update-player" class="cursor-pointer"
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
           /></span>
         </div>
-        <div class="showElements"></div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
     <script src="./script.js"></script>
   </body>
 </html>
