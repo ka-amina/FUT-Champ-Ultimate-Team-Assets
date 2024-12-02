@@ -427,11 +427,11 @@ function createPlayerCard(player) {
       /></span>
       <div id="deleteUpdateBtns" class="hidden">
         <div class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md">
-          <span id="delete-player" class="mb-4 cursor-pointer"
-            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+          <span id="delete-player" class="mb-4 cursor-pointer" 
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20" data-id="${player.id}"
           /></span>
           <span id="update-player" class="cursor-pointer "
-            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20" data-id="${player.id}"
           /></span>
         </div>
       </div>
@@ -669,11 +669,11 @@ addNewPlayer.addEventListener("click", (e) => {
       /></span>
       <div id="deleteUpdateBtns" class="hidden">
         <div class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md">
-          <span id="delete-player" class="mb-4 cursor-pointer"
-            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+          <span id="delete-player" class="mb-4 cursor-pointer" 
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20" data-id="${player.id}"
           /></span>
           <span id="update-player" class="cursor-pointer "
-            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20" data-id="${player.id}"
           /></span>
         </div>
       </div>
@@ -787,10 +787,10 @@ addNewPlayer.addEventListener("click", (e) => {
       <div id="deleteUpdateBtns" class="hidden">
         <div class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md">
           <span id="delete-player" class="mb-4 cursor-pointer"
-            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
+            ><img src="./src/icons/delete.svg" alt="" width="20" height="20" data-id="${player.id}"
           /></span>
           <span id="update-player" class="cursor-pointer "
-            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
+            ><img src="./src/icons/edit.svg" alt="" width="20" height="20" data-id="${player.id}"
           /></span>
         </div>
       </div>
@@ -1129,8 +1129,10 @@ deletePlayerButtons.forEach((button) => {
     const card = button.closest(".player-card");
     if (!card) return;
     // take the id
-    const cardId = card.getAttribute("id");
-    console.log(cardId);
+    const cardId= e.target.dataset.id;
+    console.log(cardId)
+    playersData = playersData.filter((player) => player.id !== cardId);
+    savePlayersToLocalStorage()
     // Check if the card is inside terrain or changements
     const isInTerrain = card.closest(".terrin");
     const isInChangements = card.closest(".changements");
