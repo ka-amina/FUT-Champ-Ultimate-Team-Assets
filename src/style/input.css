@@ -38,10 +38,10 @@ body {
 }
 .terrain2{
   grid-template:
-    ".. LW .. ST .. ST1 .. RW .."
-    ".. .. .. CM1 .. CM2 .. .. .."
-    ".. LB .. CB1 .. CB2 .. RB .."
-    ".. .. .. .. GK .. .. .. .."; 
+    ".. .. .. .. .. .. .. .. .. .. LW .. ST .. ST1 .. RW .. .. .. .. .. .. .. .. .."
+    ".. .. .. .. .. .. .. .. .. .. .. .. CM1 .. CM2 .. .. .. .. .. .. .. .. .. .. .."
+    ".. .. .. .. .. .. .. .. .. .. LB .. CB1 .. CB2 .. RB .. .. .. .. .. .. .. .. .."
+    ".. .. .. .. .. .. .. .. .. .. .. .. .. GK .. .. .. .. .. .. .. .. .. .. .. .."; 
 }
 
 .player-GK, .player-CB ,.player-CB2,.player-RB,.player-CM,.player-CM2,.player-CM3,.player-LW,.player-RW,.player-ST,.player-ST1,.player-LB{
