@@ -15,7 +15,7 @@ body {
   background-size: cover;
 }
 
-form {
+.players-div,form {
   background-color: rgba(156, 163, 175, 0.9);
   border-radius: 0.375rem;
 }

@@ -511,11 +511,11 @@ renderPlayersByPosition(playersData);
 const playerschange = document.getElementById("addTocards");
 
 NavigateToNextForm.addEventListener("click", (e) => {
-  let valid= validatPersonalForm()
+  let valid = validatPersonalForm();
   e.preventDefault();
-  if (valid){
-  pesonalInfo.classList.add("hidden");
-  rating.classList.remove("hidden");
+  if (valid) {
+    pesonalInfo.classList.add("hidden");
+    rating.classList.remove("hidden");
   }
 });
 
@@ -546,10 +546,10 @@ closeForm.forEach((button) => {
 addNewPlayer.addEventListener("click", (e) => {
   e.preventDefault();
   let valid = false;
-  if (position.value === "GK"){
-    valid =validatRatingGkForm()
-  }else{
-    valid= validatRatingForm()
+  if (position.value === "GK") {
+    valid = validatRatingGkForm();
+  } else {
+    valid = validatRatingForm();
   }
   if (!valid) return;
   const players = document.getElementById("players");
@@ -916,17 +916,17 @@ const validationPersonalInfoForm = {
     regex: /^[a-zA-Z\s]{5,20}$/,
     message: "the name must contain at least 5 charachters",
   },
-  "position": {
-  regex: /^(CB|CM|GK|LB|LW|RB|RW|ST)$/,
-  message: "Please select a valid position.",
-},
-  "nationality": {
-  regex: /^(ar|pt|be|fr|nl|de|br|eg|ma)$/,
-  message: "Please select a valid nationality.",
-},
-  "club": {
+  position: {
+    regex: /^(CB|CM|GK|LB|LW|RB|RW|ST)$/,
+    message: "Please select a valid position.",
+  },
+  nationality: {
+    regex: /^(ar|pt|be|fr|nl|de|br|eg|ma)$/,
+    message: "Please select a valid nationality.",
+  },
+  club: {
     regex: /^[a-zA-Z\s]{5,20}$/,
-message: "the club must contain at least 5 characters",
+    message: "the club must contain at least 5 characters",
   },
 };
 function ToggleErrorMessage(field, show, message = "") {
@@ -1148,11 +1148,11 @@ updatePlayersButton.forEach((button) => {
     if (!card) return;
     addNewPlayer.classList.add("hidden");
     updateButton.classList.remove("hidden");
-   
+
     const cardId = e.target.dataset.id;
     currentPlayerId = cardId;
     const player = playersData.filter((player) => player.id === cardId);
-    console.log(player[0])
+    console.log(player[0]);
     if (position.value === "GK") {
       gkFields.forEach((field) => {
         const input = document.getElementById(field);
@@ -1179,22 +1179,21 @@ updatePlayersButton.forEach((button) => {
     club.value = player[0].club;
     logo.src = player[0].logo;
     ratingInput.value = player[0].rating;
-    pace.value = player[0].pace || '';
-    shooting.value = player[0].shooting || '';
-    nationality.value = player[0].nationality || '';
-    passing.value = player[0].passing || '';
-    defending.value = player[0].defending || '';
-    dribbling.value = player[0].dribbling || '';
-    physical.value = player[0].physical || '';
-    diving.value = player[0].diving || '';
-    kicking.value = player[0].kicking || '';
-    reflexes.value = player[0].reflexes || '';
-    speed.value = player[0].speed || '';
-    positioning.value = player[0].positioning || '';
-    handling.value = player[0].handling || '';
+    pace.value = player[0].pace || "";
+    shooting.value = player[0].shooting || "";
+    nationality.value = player[0].nationality || "";
+    passing.value = player[0].passing || "";
+    defending.value = player[0].defending || "";
+    dribbling.value = player[0].dribbling || "";
+    physical.value = player[0].physical || "";
+    diving.value = player[0].diving || "";
+    kicking.value = player[0].kicking || "";
+    reflexes.value = player[0].reflexes || "";
+    speed.value = player[0].speed || "";
+    positioning.value = player[0].positioning || "";
+    handling.value = player[0].handling || "";
 
     console.log(player);
-   
   });
 });
 
@@ -1210,7 +1209,7 @@ updateButton.addEventListener("click", (e) => {
     position: position.value,
     rating: ratingInput.value,
     club: club.value,
-    logo:logo.src,
+    logo: logo.src,
     flag: `https://cdn.sofifa.net/flags/${nationality.value}.png`,
     nationality: nationality.value,
   };
@@ -1220,7 +1219,7 @@ updateButton.addEventListener("click", (e) => {
     updatedPlayer.kicking = kicking.value;
     updatedPlayer.reflexes = reflexes.value;
     updatedPlayer.speed = speed.value;
-    updatedPlayer.positioning=positioning.value;
+    updatedPlayer.positioning = positioning.value;
   } else {
     updatedPlayer.pace = pace.value;
     updatedPlayer.shooting = shooting.value;
@@ -1239,5 +1238,5 @@ updateButton.addEventListener("click", (e) => {
     console.log("Player data updated:", playersData[playerIndex]);
   }
   location.reload();
-  reset()
+  reset();
 });
