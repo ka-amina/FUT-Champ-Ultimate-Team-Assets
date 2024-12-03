@@ -169,76 +169,6 @@
           </div>
           <span>Goalkeeper</span>
           <div class="Gk-players flex flex-wrap">
-            <!-- <div id="players" class="flex flex-wrap md:w-full">
-              <div class="player-LB">
-                <div class="relative player-card w-fit">
-                  <img
-                    src="./src/assets/img/badge_gold.webp"
-                    alt=""
-                    class="w-52 h-72"
-                  />
-                  <img
-                    src="./src/assets/img/players/Ismael_Saibari.webp"
-                    alt=""
-                    class="absolute top-16 left-10"
-                  />
-                  <div
-                    class="flex text-center flex-col leading-3 absolute top-16 left-8"
-                  >
-                    <span class="font-bold text-xl">90</span>
-                    <span class="font-mono">CF</span>
-                  </div>
-                  <div
-                    class="absolute bottom-20 right-20 font-semibold player-name-card"
-                  >
-                    Saibari
-                  </div>
-                  <div
-                    class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold"
-                  >
-                    <div class="flex flex-col leading-3">
-                      <span class="text-xxs">PAC</span>
-                      <span class="">80</span>
-                    </div>
-                    <div class="flex flex-col leading-3">
-                      <span class="text-xxs">SHO</span>
-                      <span class="">87</span>
-                    </div>
-                    <div class="flex flex-col leading-3">
-                      <span class="text-xxs">PAS</span>
-                      <span class="">90</span>
-                    </div>
-                    <div class="flex flex-col leading-3">
-                      <span class="text-xxs">DRI</span>
-                      <span class="">94</span>
-                    </div>
-                    <div class="flex flex-col leading-3">
-                      <span class="text-xxs">DEF</span>
-                      <span class="">33</span>
-                    </div>
-                    <div class="flex flex-col leading-3">
-                      <span class="text-xxs">PHY</span>
-                      <span class="">64</span>
-                    </div>
-                  </div>
-                  <div
-                    id="logo-and-flag"
-                    class="flex absolute bottom-7 left-20 gap-2 items-center"
-                  >
-                    <img
-                      src="./src/assets/img/flag/flag.webp"
-                      alt=""
-                      class="w-5 h-3"
-                    />
-                    <img
-                      src="./src/assets/img/logo/logo.webp"
-                      alt=""
-                      class="w-5 h-6"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
           <span>Center Back</span>
           <div class="CB-players flex flex-wrap"></div>
@@ -325,19 +255,20 @@
 
               <div class="flex flex-col">
                 <label for="nationality" class="mb-2">Nationality</label>
-                <input
-                  id="nationality"
-                  type="text"
-                  placeholder="Nationality"
-                  class="p-2 w-80 rounded border border-gray-500"
-                />
+                <select name="nationality" id="nationality" class="p-2 w-80 rounded">
+                  <option value="">select Nationality</option>
+                  <option value="ar">Argentina</option>
+                  <option value="pt">Portugal</option>
+                  <option value="be">Belgium</option>
+                  <option value="fr">France</option>
+                  <option value="nl">Netherlands</option>
+                  <option value="de">Germany</option>
+                  <option value="br">Brazil</option>
+                  <option value="eg">Egypt</option>
+                  <option value="eg">Morocco</option>
+                </select>
               </div>
               <p id="nationality-error" class="w-80 hidden text-error"></p>
-
-              <div class="flex flex-col">
-                <label for="flag" class="mb-2"> flag</label>
-                <input id="flag" type="file" class="w-80" />
-              </div>
               <p id="flag-error" class="w-80 hidden text-error"></p>
 
               <div class="flex flex-col">
@@ -568,75 +499,22 @@
                   <img src="./src/icons/arrowRight.svg" alt="" />
                 </button>
               </div>
-
-              <button
-                id="addNewPlayer"
-                class="bg-primary hover:bg-primary-hover text-white p-2 w-80 rounded mb-6"
-              >
-                Add Player
-              </button>
+              <div id="change">
+                <button
+                  id="addNewPlayer"
+                  class="bg-primary hover:bg-primary-hover text-white p-2 w-80 rounded mb-6"
+                >
+                  Add Player
+                </button>
+                <button
+                  id="updatePlayer"
+                  class="bg-primary hover:bg-primary-hover text-white p-2 w-80 rounded mb-6 hidden"
+                >
+                Update Player
+                </button>
+              </div>
             </form>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="relative player-card w-fit">
-      <img src="./src/assets/img/badge_gold.webp" alt="" class="w-52 h-72" />
-      <img
-        src="./src/assets/img/players/Ismael_Saibari.webp"
-        alt=""
-        class="absolute top-16 left-10"
-      />
-      <div class="flex text-center flex-col leading-3 absolute top-16 left-8">
-        <span class="font-bold text-xl">90</span>
-        <span class="font-mono">CF</span>
-      </div>
-
-      <div class="absolute bottom-20 right-20 font-semibold player-name-card">
-        Saibari
-      </div>
-
-      <div class="flex flex-row gap-2 absolute bottom-14 left-7 font-semibold">
-        <div class="flex flex-col leading-3">
-          <span class="text-xxs">PAC</span>
-          <span class="">80</span>
-        </div>
-        <div class="flex flex-col leading-3">
-          <span class="text-xxs">SHO</span>
-          <span class="">87</span>
-        </div>
-        <div class="flex flex-col leading-3">
-          <span class="text-xxs">PAS</span>
-          <span class="">90</span>
-        </div>
-        <div class="flex flex-col leading-3">
-          <span class="text-xxs">DRI</span>
-          <span class="">94</span>
-        </div>
-        <div class="flex flex-col leading-3">
-          <span class="text-xxs">DEF</span>
-          <span class="">33</span>
-        </div>
-        <div class="flex flex-col leading-3">
-          <span class="text-xxs">PHY</span>
-          <span class="">64</span>
-        </div>
-      </div>
-      <span
-        id="show-options"
-        class="cursor-pointer absolute top-20 right-8 show-options"
-        ><img src="./src/icons/dots.svg" alt="" width="20" height="20"
-      /></span>
-      <div id="deleteUpdateBtns" class="hidden">
-        <div
-          class="bg-gray-700 flex flex-col absolute top-28 right-7 py-2 px-1 rounded-md"
-        >
-          <span id="delete-player" class="mb-4 cursor-pointer"
-            ><img src="./src/icons/delete.svg" alt="" width="20" height="20"
-          /></span>
-          <span id="update-player" class="cursor-pointer"
-            ><img src="./src/icons/edit.svg" alt="" width="20" height="20"
-          /></span>
         </div>
       </div>
     </div>
