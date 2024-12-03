@@ -1240,3 +1240,10 @@ updateButton.addEventListener("click", (e) => {
   location.reload();
   reset();
 });
+
+
+function players(){
+  const play= document.querySelector(".players-div");
+  const count =0;
+  play.foreach()
+}
