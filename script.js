@@ -511,12 +511,12 @@ renderPlayersByPosition(playersData);
 const playerschange = document.getElementById("addTocards");
 
 NavigateToNextForm.addEventListener("click", (e) => {
-  // let valid= validatPersonalForm()
+  let valid= validatPersonalForm()
   e.preventDefault();
-  // if (valid){
+  if (valid){
   pesonalInfo.classList.add("hidden");
   rating.classList.remove("hidden");
-  // }
+  }
 });
 
 backToPreviousForm.addEventListener("click", (e) => {
@@ -545,13 +545,13 @@ closeForm.forEach((button) => {
 // ajouter les joueurs dans le terrin
 addNewPlayer.addEventListener("click", (e) => {
   e.preventDefault();
-  // let valid = false;
-  // if (position.value === "GK"){
-  //   valid =validatRatingGkForm()
-  // }else{
-  //   valid= validatRatingForm()
-  // }
-  // if (!valid) return;
+  let valid = false;
+  if (position.value === "GK"){
+    valid =validatRatingGkForm()
+  }else{
+    valid= validatRatingForm()
+  }
+  if (!valid) return;
   const players = document.getElementById("players");
   const player = document.createElement("div");
   const gkPlayer = document.createElement("div");
@@ -913,24 +913,20 @@ position.addEventListener("change", (e) => {
 // personal info form
 const validationPersonalInfoForm = {
   "player-name": {
-    regex: /^[a-zA-Z\s]{2,10}$/,
+    regex: /^[a-zA-Z\s]{5,20}$/,
     message: "the name must contain at least 5 charachters",
   },
-  "profile-img": {
-    regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
-    message: "select .jpg .png .webp .jpeg files",
-  },
-  nationality: {
-    regex: /^[a-zA-Z\s]{10,20}$/,
-    message: "Enter a valid nationality",
-  },
-  flag: {
-    regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
-    message: "select .jpg .png .webp .jpeg files",
-  },
-  club: {
-    regex: /^https?:\/\/.*\/.*\.(png|webp|jpeg|jpg)\??.*$/,
-    message: "select .jpg .png .webp .jpeg files",
+  "position": {
+  regex: /^(CB|CM|GK|LB|LW|RB|RW|ST)$/,
+  message: "Please select a valid position.",
+},
+  "nationality": {
+  regex: /^(ar|pt|be|fr|nl|de|br|eg|ma)$/,
+  message: "Please select a valid nationality.",
+},
+  "club": {
+    regex: /^[a-zA-Z\s]{5,20}$/,
+message: "the club must contain at least 5 characters",
   },
 };
 function ToggleErrorMessage(field, show, message = "") {
